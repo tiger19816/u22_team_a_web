@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Dao {
-	private final String DB_NAME = "name";
+	private final String DB_HOST = "localhost";
+	private final String DB_NAME = "U22";
 	private final String DB_USER = "root";
 	private final String DB_PASS = "";
 	
@@ -18,7 +19,7 @@ public class Dao {
 	public Dao() throws SQLException , ClassNotFoundException{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			this.cn = DriverManager.getConnection("jdbc:mysql://localhost/" + DB_NAME + "?characterEncoding=utf8" , DB_USER , DB_PASS);
+			this.cn = DriverManager.getConnection("jdbc:mysql://" + DB_HOST + "/" + DB_NAME + "?characterEncoding=utf8" , DB_USER , DB_PASS);
 			this.st = cn.createStatement();
 		}catch(SQLException e) {
 			throw e;
