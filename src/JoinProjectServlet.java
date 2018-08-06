@@ -34,18 +34,23 @@ public class JoinProjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		//会員NO取得
-		String memberNo = request.getParameter("no");
+		String memberNo = "";
+		int judge = Integer.parseInt(request.getParameter("flag"));
+		System.out.println(memberNo);
+		memberNo = "3";
 		//投稿情報を格納する配列
 		ArrayList<Posts> posts = new ArrayList<Posts>();
-
 		//DBに接続
 		DataAccess da = null;
 		try {
 			da = new DataAccess();
 			//投稿情報抽出
-			posts = da.MyPostSelect(Integer.parseInt(memberNo));
+			if(judge == 1) {
+				posts = da.MyPostSelect(Integer.parseInt(memberNo));
+			}else {
+				posts = da.MyAssistSelect(Integer.parseInt(memberNo));
+			}
 			da.close();
 		}
 		catch (SQLException e) {

@@ -10,6 +10,8 @@ ArrayList<Posts> postsList = (ArrayList<Posts>)request.getAttribute("LIST");
 		{
 			"postTitle":"<%= postsList.get(i).getTitle() %>",
 			"postPhoto":"<%= postsList.get(i).getPhoto() %>",
+			"postMoney":"<%= postsList.get(i).getMoney() %>",
+			"postDate":"<%= postsList.get(i).getDate() %>",
 			"postStatus":"<%= postsList.get(i).getStatus() %>"
 		}<% if(i != (postsList.size()-1)){ %>,<% } %>
 		<% } %>

@@ -7,11 +7,15 @@ public class Posts {
 	private int _no;
 	private String _title;
 	private String _photo;
+	private int _money;
+	private String _date;
 	private String _status;
 	public Posts(){
 		this._no = 0;
 		this._title = "";
 		this._photo = "";
+		this._money = 0;
+		this._date = "";
 		this._status = "";
 	}
 
@@ -35,6 +39,20 @@ public class Posts {
 	 */
 	public void setPhoto(String photo) {
 		this._photo = photo;
+	}
+	/**
+	 * 投稿金額のセッター
+	 * @param money
+	 */
+	public void setMoney(int money) {
+		this._money = money;
+	}
+	/**
+	 * 日付のセッター
+	 * @param date
+	 */
+	public void setDate(String date) {
+		this._date = date;
 	}
 	/**
 	 * 投稿状態のセッター
@@ -74,6 +92,20 @@ public class Posts {
 	 */
 	public String getPhoto() {
 		return this._photo;
+	}
+	/**
+	 * 投稿金額のゲッター
+	 * @return moneyのゲッター
+	 */
+	public int getMoney() {
+		return this._money;
+	}
+	/**
+	 * 投稿日付のゲッター
+	 * @return dateのゲッター
+	 */
+	public String getDate() {
+		return this._date;
 	}
 	/**
 	 * 投稿状態のゲッター
