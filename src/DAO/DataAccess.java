@@ -13,4 +13,7 @@ public class DataAccess extends Dao {
 		super();
 	}
 
+	public void InsertPosts() {
+		
+	}
 }
