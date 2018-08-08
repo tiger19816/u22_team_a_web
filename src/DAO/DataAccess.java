@@ -13,7 +13,20 @@ public class DataAccess extends Dao {
 		super();
 	}
 
-	public void InsertPosts() {
-		
+	public void InsertPosts() throws Exception, SQLException{
+		String sql = "insert into posts(member_no, post_date, post_money, place, latitude, longutude, title, content, photo, target_money, cleaning_flag) values("
+				+ " ,"//メンバーID
+				+ " ,"//カテゴリーNO
+				+ " ,"//プロジェクト日
+				+ " ,"//プロジェクト初期投資
+				+ " ,"//場所
+				+ " ,"//latitude
+				+ " ,"//longitude
+				+ " ,"//タイトル
+				+ " ,"//内容
+				+ " ,"//写真名
+				+ " ,"//収益
+				+ " 0"//クリーン確認 初期値０
+				+ ")";
 	}
 }
