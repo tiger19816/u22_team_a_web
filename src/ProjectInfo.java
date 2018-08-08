@@ -3,7 +3,6 @@
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,11 @@ import DAO.u22Dao;
 public class ProjectInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD:src/ProjectInfo.java
     /**
+=======
+	/**
+>>>>>>> 33cf760aba6b0b5ad891bc9c4d873a5212627781:src/TestServlet.java
      * @see HttpServlet#HttpServlet()
      */
     public ProjectInfo() {
