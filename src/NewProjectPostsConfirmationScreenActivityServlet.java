@@ -37,7 +37,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		String category = request.getParameter("category");
 		String content  = request.getParameter("content");
 		String InvestmentAmount  = request.getParameter("InvestmentAmount");
-		Byte[] ImgFile = request.getParameter("ImfFile");
+		//Byte[] ImgFile = request.getParameter("ImfFile");
 		
 		
 		

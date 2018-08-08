@@ -29,4 +29,13 @@ public class DataAccess extends Dao {
 				+ " 0"//クリーン確認 初期値０
 				+ ")";
 	}
+	
+	public void InsertTest() throws Exception, SQLException{
+		String sql = "insert into u22_test(title, ImgName, place, category) values("
+				+ " " + + ","//title
+				+ " " + + ","//imgName
+				+ " " + + ","//place
+				+ " " + + ","//category
+				+ ")";
+	}
 }
