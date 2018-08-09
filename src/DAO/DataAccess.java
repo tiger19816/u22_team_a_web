@@ -2,6 +2,8 @@ package DAO;
 
 import java.sql.SQLException;
 
+import hal.u22.works.team.a.NewProjectPostsConfirmationScreenActivityInfo.NewProjectPostsConfirmationScreenActivityInfo;
+
 public class DataAccess extends Dao {
 
 	/**
@@ -30,12 +32,12 @@ public class DataAccess extends Dao {
 				+ ")";
 	}
 	
-	public void InsertTest() throws Exception, SQLException{
+	public void InsertTest(NewProjectPostsConfirmationScreenActivityInfo info) throws Exception, SQLException{
 		String sql = "insert into u22_test(title, ImgName, place, category) values("
-				+ " " + + ","//title
-				+ " " + + ","//imgName
-				+ " " + + ","//place
-				+ " " + + ","//category
+				+ " " + info.getTitle() + ","//title
+				+ " " + info.getPhoto() + ","//imgName
+				+ " " + info.getPlace() + ","//place
+				+ " " + info.getCategoryNo() + ","//category
 				+ ")";
 	}
 }

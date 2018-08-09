@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.DataAccess;
+import hal.u22.works.team.a.NewProjectPostsConfirmationScreenActivityInfo.NewProjectPostsConfirmationScreenActivityInfo;
+
 /**
  * Servlet implementation class NewProjectPostsConfirmationScreenActivityServlet
  */
@@ -30,14 +33,25 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		//文字化け対策
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		
-		String title = request.getParameter("titile");
-		String imgName = request.getParameter("imgName");
-		String place = request.getParameter("place");
-		String category = request.getParameter("category");
-		String content  = request.getParameter("content");
-		String InvestmentAmount  = request.getParameter("InvestmentAmount");
+		//クラス宣言
+		NewProjectPostsConfirmationScreenActivityInfo info = new NewProjectPostsConfirmationScreenActivityInfo();
+		//クラスにAndroidの値を格納1
+		info.setTitle(request.getParameter("titile"));
+		info.setPhoto(request.getParameter("imgName"));
+		info.setPlace(request.getParameter("place"));
+		info.setCategoryNo(request.getParameter("category"));
+		info.setContent(request.getParameter("content"));
+		info.setPostMoney(request.getParameter("InvestmentAmount"));
 		//Byte[] ImgFile = request.getParameter("ImfFile");
+		
+		DataAccess da;
+		
+		try {
+			da = new DataAccess();
+			da.InsertTest(info);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		
 		
