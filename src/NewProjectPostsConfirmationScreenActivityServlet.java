@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		//クラス宣言
 		NewProjectPostsConfirmationScreenActivityInfo info = new NewProjectPostsConfirmationScreenActivityInfo();
 		//クラスにAndroidの値を格納1
+		System.out.println("from Android!!");
 		info.setTitle(request.getParameter("titile"));
 		info.setPhoto(request.getParameter("imgName"));
 		info.setPlace(request.getParameter("place"));
@@ -53,7 +56,9 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 			// TODO: handle exception
 		}
 		
-		
+		RequestDispatcher rd = request.getRequestDispatcher("NewProjectPostsConfirmationScreenActivityServlet.jsp");
+		rd.forward(request, response);
+
 		
 	}
 
