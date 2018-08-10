@@ -39,5 +39,10 @@ public class DataAccess extends Dao {
 				+ " " + info.getPlace() + ","//place
 				+ " " + info.getCategoryNo() + ","//category
 				+ ")";
+		try {
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

@@ -54,11 +54,9 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 			da.InsertTest(info);
 		}catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("NewProjectPostsConfirmationScreenActivityServlet.jsp");
-		rd.forward(request, response);
-
 		
 	}
 
