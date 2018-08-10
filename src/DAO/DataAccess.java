@@ -33,16 +33,21 @@ public class DataAccess extends Dao {
 	}
 	
 	public void InsertTest(NewProjectPostsConfirmationScreenActivityInfo info) throws Exception, SQLException{
+		
 		String sql = "insert into u22_test(title, ImgName, place, category) values("
-				+ " " + info.getTitle() + ","//title
-				+ " " + info.getPhoto() + ","//imgName
-				+ " " + info.getPlace() + ","//place
-				+ " " + info.getCategoryNo() + ","//category
+				+ " '" + info.getTitle() + "',"//title
+				+ " '" + info.getPhoto() + "',"//imgName
+				+ " '" + info.getPlace() + "',"//place
+				+ " '" + info.getCategoryNo() + "'"//category
 				+ ")";
+		System.out.println(sql);
 		try {
-			
+			if(!info.getTitle().equals("")) {
+				st.executeLargeUpdate(sql);
+			}
 		}catch (Exception e) {
 			// TODO: handle exception
+			
 		}
 	}
 }

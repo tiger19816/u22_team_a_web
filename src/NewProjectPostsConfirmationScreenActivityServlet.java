@@ -39,7 +39,9 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		NewProjectPostsConfirmationScreenActivityInfo info = new NewProjectPostsConfirmationScreenActivityInfo();
 		//クラスにAndroidの値を格納1
 		System.out.println("from Android!!");
-		info.setTitle(request.getParameter("titile"));
+		System.out.println(request.getParameter("title"));
+		
+		info.setTitle(request.getParameter("title"));
 		info.setPhoto(request.getParameter("imgName"));
 		info.setPlace(request.getParameter("place"));
 		info.setCategoryNo(request.getParameter("category"));
