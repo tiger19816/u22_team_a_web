@@ -11,11 +11,11 @@ public class Dao {
 	private final String DB_NAME = "U22";
 	private final String DB_USER = "root";
 	private final String DB_PASS = "";
-	
+
 	protected Connection cn = null;
 	protected Statement st = null;
 	protected ResultSet rs = null;
-	
+
 	public Dao() throws SQLException , ClassNotFoundException{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -27,7 +27,23 @@ public class Dao {
 			throw e;
 		}
 	}
+	public void read(String sql)throws SQLException{
+		try{
 
+			this.rs = st.executeQuery(sql);
+
+		}catch(SQLException e){
+		}
+	}
+	public void upgrade(String sql)throws SQLException{
+		try{
+
+			st.executeUpdate(sql);
+
+		}catch(SQLException e){
+			throw e;
+		}
+	}
 	public void close() throws SQLException{
 		try {
 			if(rs != null) {

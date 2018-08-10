@@ -2,7 +2,6 @@
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.DataAccess;
-import entities.Posts;
+import DAO.u22Dao;
 
 /**
- * Servlet implementation class JoinProjectServlet
+ * Servlet implementation class DonationServlet
  */
-@WebServlet("/JoinProjectServlet")
-public class JoinProjectServlet extends HttpServlet {
+@WebServlet("/DonationServlet")
+public class DonationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinProjectServlet() {
+    public DonationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,37 +32,34 @@ public class JoinProjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//会員NO取得
-		String memberNo = "";
-		int judge = Integer.parseInt(request.getParameter("flag"));
-		System.out.println(memberNo);
-		memberNo = "3";
-		//投稿情報を格納する配列
-		ArrayList<Posts> posts = new ArrayList<Posts>();
-		//DBに接続
-		DataAccess da = null;
+		//文字化け対策
+		request.setCharacterEncoding("utf-8");
+
+		String id = request.getParameter("id");
+		String donation = request.getParameter("donationMoney");
+
+		String result = "";
+		u22Dao dao;
+
 		try {
-			da = new DataAccess();
-			//投稿情報抽出
-			if(judge == 1) {
-				posts = da.MyPostSelect(Integer.parseInt(memberNo));
-			}else {
-				posts = da.MyAssistSelect(Integer.parseInt(memberNo));
-			}
-			da.close();
-		}
-		catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		catch (Exception e) {
-			// TODO 自動生成された catch ブロック
+			dao = new u22Dao();
+			dao.setDonation(id,donation);
+			System.out.println(result);
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("LIST", posts);
-		RequestDispatcher rd = request.getRequestDispatcher("myposts_list_json.jsp");
+		request.setAttribute("result", result);
+
+		RequestDispatcher rd = request.getRequestDispatcher("resultJson.jsp");
 		rd.forward(request, response);
+
+//							//JSONを作成する
+//							response.setContentType("application/json; charset=UTF-8");
+//							PrintWriter out = response.getWriter();
+//							out.print("{");
+//							out.println("\"result\":true");
+//							out.println("}");
 	}
 
 	/**
