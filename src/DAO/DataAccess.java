@@ -15,7 +15,7 @@ public class DataAccess extends Dao {
 		super();
 	}
 
-	public void InsertPosts() throws Exception, SQLException{
+	public void InsertPosts(NewProjectPostsConfirmationScreenActivityInfo info) throws Exception, SQLException{
 		String sql = "insert into posts(member_no, post_date, post_money, place, latitude, longutude, title, content, photo, target_money, cleaning_flag) values("
 				+ " ,"//メンバーID
 				+ " ,"//カテゴリーNO
@@ -30,6 +30,17 @@ public class DataAccess extends Dao {
 				+ " ,"//収益
 				+ " 0"//クリーン確認 初期値０
 				+ ")";
+		
+		try {
+			if(!info.getTitle().equals("")) {
+				System.out.println("Insert");
+				st.executeUpdate(sql);
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+			
+			// TODO: handle exception	
+		}
 	}
 	
 	public void InsertTest(NewProjectPostsConfirmationScreenActivityInfo info) throws Exception, SQLException{
@@ -43,11 +54,13 @@ public class DataAccess extends Dao {
 		System.out.println(sql);
 		try {
 			if(!info.getTitle().equals("")) {
-				st.executeLargeUpdate(sql);
+				System.out.println("Insert");
+				st.executeUpdate(sql);
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
 			
+			// TODO: handle exception	
 		}
 	}
 }
