@@ -11,6 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -85,7 +87,6 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		NewProjectPostsConfirmationScreenActivityInfo info = new NewProjectPostsConfirmationScreenActivityInfo();
 		//クラスにAndroidの値を格納1
 		System.out.println("from Android!!");
-		System.out.println(request.getParameter("title"));
 		
 		info.setTitle(request.getParameter("title"));
 		info.setPhoto(request.getParameter("imgName"));
@@ -93,11 +94,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		info.setCategoryNo(request.getParameter("category"));
 		info.setContent(request.getParameter("content"));
 		info.setPostMoney(request.getParameter("InvestmentAmount"));
-////		//画像のbyte[]取得と変換
-//		String ImgFile = request.getParameter("ImgFile");
-//		byte[] byteImg  = ImgFile.getBytes(StandardCharsets.UTF_8);
-//		BufferedImage img = getImageFromBytes(byteImg);
-
+		info.setMemberNo(request.getParameter("userId"));
 
 		//画像を保存するtempフォルダのパスを取得
 		String tempPath = getServletContext().getRealPath("temp");
@@ -105,7 +102,6 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		Path path = Paths.get(tempPath);
 		Path smallPath = Paths.get(tempSmallPath);	
 
-		System.out.println("フォルダー作成");
 		//tempフォルダが存在しない場合は作成する
 		if(!Files.exists(path)) {
 			Files.createDirectory(path);
@@ -113,38 +109,20 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		if(!Files.exists(smallPath)) {
 			Files.createDirectory(smallPath);
 		}
-		
-		System.out.println("画像保存");
 		//画像を保存する
 		
 		if(request.getPart("filename")!= null ) {
-			System.out.println("in the ImageSave");
-//パターン１
-//		    try{
-//		    	
-//		        OutputStream out=new FileOutputStream(tempPath);//ファイルとアプリを繋ぐ
-//		        ImageIO.write(img, "Test.jpg", out);//指定の形式で出力
-//		      }catch(IOException e){
-//		        //例外処理が発生したらエラーをコンソールに出して、falseを返す
-//		        System.out.println("Err="+e);//エラー出力
-//		      }
-			
-//パターン２	
-			
 			ImageSave is = new ImageSave();
 			is.imageTempSave(request.getPart("filename"), tempPath);
-			
-		}else {
-			
-			System.out.println("failure of the ImageSave");
+			info.setPhoto(is.getFileName());
 		}
 		
-		
+		//データベース接続
 		DataAccess da = null;
-		
+		//データベースへの登録
 		try {
 			da = new DataAccess();
-			da.InsertTest(info);
+			da.InsertPosts(info);
 			da.close();
 		}catch (Exception e) {
 			// TODO: handle exception

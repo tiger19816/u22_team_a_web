@@ -25,7 +25,7 @@ public class ImageSave {
 	public ImageSave() {
 		this.fileName = "";
 	}
-
+	
 	public void imageTempSave(Part part, String path) {
 
 		//画像を保存してファイル名を取得
