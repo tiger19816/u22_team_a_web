@@ -86,28 +86,32 @@ public class ImageSave {
 			String strDate = fDate.format(date);
 
 			//画像名を"ユーザー名_現在日時.拡張子に変更"
-			filename = /*userId + "_" +*/ strDate + "." + fileType;
+			filename = /*userId + "_" +*/ strDate + "." + fileType + "jpg";
 
 			// 画像ファイルをpath+filenameとして保存
-			part.write(path + "/" + filename  + ".jpg");
+			part.write(path + "\\" + filename);
 //			isJpegFile = true;
 
 			// サムネイル画像の作成
-			createThumbnail(path + "/" + filename, path + "/small/" + filename  + ".jpg", fileType, 512);
+			createThumbnail(path + "\\" + filename, path + "\\small\\" + filename, fileType, 512);
 		}
 		return filename;
 	}
 
 	private void createThumbnail(String originFile, String thumbFile, String fileType, int width) {
 		try {
+			System.out.println("もとの画像読み込み");
+			System.out.println(originFile);
 			// 元画像の読み込み
 			BufferedImage image = ImageIO.read(new File(originFile));
 
+			System.out.println("もとの画像情報を取得");
 			// 元画像の情報を取得
 			int originWidth = image.getWidth();
 			int originHeight = image.getHeight();
 			int type = image.getType();
 
+			System.out.println("計算");
 			// 縮小画像の高さを計算
 			int height = originHeight * width / originWidth;
 			if(height > 512){
@@ -115,17 +119,25 @@ public class ImageSave {
 				width = originWidth * height / originHeight;
 			}
 
+			System.out.println("作成");
 			// 縮小画像の作成
 			BufferedImage smallImage = new BufferedImage(width, height, type);
 			Graphics2D g2 = smallImage.createGraphics();
 
+			System.out.println("アルゴリズム");
 			// 描画アルゴリズムの設定(品質優先、アンチエイリアスON)
 			g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_DEFAULT);
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+			System.out.println("縮小保存");
 			// 元画像の縮小&保存
 			g2.drawImage(image, 0, 0, width, height, null);
 			ImageIO.write(smallImage, fileType, new File(thumbFile));
+			
+			System.out.println(thumbFile);
+			
+			System.out.println("縮小保存完了");
+			
 		} catch (Exception e) {
 			//log("画像の縮小に失敗: " + e);
 			System.out.println("画像の縮小に失敗");

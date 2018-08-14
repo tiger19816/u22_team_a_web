@@ -95,6 +95,8 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		info.setContent(request.getParameter("content"));
 		info.setPostMoney(request.getParameter("InvestmentAmount"));
 		info.setMemberNo(request.getParameter("userId"));
+		info.setLatitude(request.getParameter("latitude"));
+		info.setLongitude(request.getParameter("longitude"));
 
 		//画像を保存するtempフォルダのパスを取得
 		String tempPath = getServletContext().getRealPath("temp");

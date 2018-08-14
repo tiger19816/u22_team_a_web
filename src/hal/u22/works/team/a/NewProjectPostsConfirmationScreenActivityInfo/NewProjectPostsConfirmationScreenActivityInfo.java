@@ -7,8 +7,8 @@ public class NewProjectPostsConfirmationScreenActivityInfo {
 	private String postDate;	//プロジェクト投稿日
 	private String postMoney;	//プロジェクト初期投資
 	private String place;		//場所
-	private String latitude;	//
-	private String longitude;	//
+	private String latitude;	//緯度
+	private String longitude;	//経度
 	private String title;		//タイトル
 	private String content;		//内容
 	private String photo;		//写真の名前
