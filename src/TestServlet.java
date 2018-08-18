@@ -15,7 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD
+    /**
+=======
 	/**
+>>>>>>> master
      * @see HttpServlet#HttpServlet()
      */
     public TestServlet() {
@@ -28,6 +32,11 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println(111);
+=======
+>>>>>>> master
 	}
 
 	/**
