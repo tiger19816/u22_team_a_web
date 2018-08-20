@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.Contact;
-import DAO.Sql;
+import hal.u22.works.team.a.tools.Contact;
+import hal.u22.works.team.a.tools.Sql;
 
 /**
  * Servlet implementation class ContactGetServlet
@@ -32,7 +32,6 @@ public class ContactServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");

@@ -1,4 +1,4 @@
-package entities;
+package hal.u22.works.team.a.entities;
 
 public class Posts {
 	/**

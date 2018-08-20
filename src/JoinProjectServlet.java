@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.DataAccess;
-import entities.Posts;
+import hal.u22.works.team.a.entities.Posts;
+import hal.u22.works.team.a.tools.DataAccess;
 
 /**
  * Servlet implementation class JoinProjectServlet
@@ -20,7 +20,7 @@ import entities.Posts;
 @WebServlet("/JoinProjectServlet")
 public class JoinProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */

@@ -2,9 +2,9 @@ package hal.u22.works.team.a.tools;
 
 import java.sql.SQLException;
 
-public class PIDAO extends Dao{
+public class ProjectInfoDao extends Dao{
 
-	public PIDAO() throws SQLException, ClassNotFoundException{
+	public ProjectInfoDao() throws SQLException, ClassNotFoundException{
 		super();
 	}
 

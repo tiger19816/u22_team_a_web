@@ -3,8 +3,8 @@ package hal.u22.works.team.a.tools;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import entities.Posts;
 import hal.u22.works.team.a.NewProjectPostsConfirmationScreenActivityInfo.NewProjectPostsConfirmationScreenActivityInfo;
+import hal.u22.works.team.a.entities.Posts;
 
 public class DataAccess extends Dao {
 	/**

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.Contact;
-import DAO.Sql;
+import hal.u22.works.team.a.tools.Contact;
+import hal.u22.works.team.a.tools.Sql;;
 
 /**
  * Servlet implementation class ContactGetServlet
@@ -88,7 +88,7 @@ public class ContactGetServlet extends HttpServlet {
 
 		//アンドロイド側に実行結果を返す
 		//********************************************
-		
+
 
 		//*******************************************
 	}

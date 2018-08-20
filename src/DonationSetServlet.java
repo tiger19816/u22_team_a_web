@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.PIDAO;
+import hal.u22.works.team.a.tools.ProjectInfoDao;
+
+
 
 /**
  * Servlet implementation class DonationSetServlet
@@ -36,10 +38,10 @@ public class DonationSetServlet extends HttpServlet {
 
 		String id = request.getParameter("id");
 		String donation = request.getParameter("donationMoney");
-		PIDAO dao = null;
+		ProjectInfoDao dao = null;
 
 		try {
-			dao = new PIDAO();
+			dao = new ProjectInfoDao();
 			dao.setDonation(id, donation);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

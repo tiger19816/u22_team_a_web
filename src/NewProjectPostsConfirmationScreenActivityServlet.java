@@ -1,21 +1,14 @@
 
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.imageio.ImageIO;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.File;
-
-import DAO.DataAccess;
-import hal.u22.works.team.a.NewProjectPostsConfirmationScreenActivityInfo.NewProjectPostsConfirmationScreenActivityInfo;
 import hal.u22.works.team.a.NewProjectPostsConfirmationScreenActivityInfo.ImageSave;
+import hal.u22.works.team.a.NewProjectPostsConfirmationScreenActivityInfo.NewProjectPostsConfirmationScreenActivityInfo;
+import hal.u22.works.team.a.tools.DataAccess;
 
 /**
  * Servlet implementation class NewProjectPostsConfirmationScreenActivityServlet
@@ -37,7 +28,7 @@ import hal.u22.works.team.a.NewProjectPostsConfirmationScreenActivityInfo.ImageS
 
 public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	/**
 	* イメージ→バイト列に変換
 	* @param img イメージデータ
@@ -65,7 +56,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 	BufferedImage img = ImageIO.read(baos);
 	return img;
 	}
-	
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -73,7 +64,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
         super();
         // TODO Auto-generated constructor stub
     }
-    
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -87,7 +78,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		NewProjectPostsConfirmationScreenActivityInfo info = new NewProjectPostsConfirmationScreenActivityInfo();
 		//クラスにAndroidの値を格納1
 		System.out.println("from Android!!");
-		
+
 		info.setTitle(request.getParameter("title"));
 		info.setPhoto(request.getParameter("imgName"));
 		info.setPlace(request.getParameter("place"));
@@ -102,7 +93,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 		String tempPath = getServletContext().getRealPath("temp");
 		String tempSmallPath = tempPath + "\\small";
 		Path path = Paths.get(tempPath);
-		Path smallPath = Paths.get(tempSmallPath);	
+		Path smallPath = Paths.get(tempSmallPath);
 
 		//tempフォルダが存在しない場合は作成する
 		if(!Files.exists(path)) {
@@ -112,13 +103,13 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 			Files.createDirectory(smallPath);
 		}
 		//画像を保存する
-		
+
 		if(request.getPart("filename")!= null ) {
 			ImageSave is = new ImageSave();
 			is.imageTempSave(request.getPart("filename"), tempPath);
 			info.setPhoto(is.getFileName());
 		}
-		
+
 		//データベース接続
 		DataAccess da = null;
 		//データベースへの登録
@@ -130,8 +121,8 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
 			// TODO: handle exception
 			System.out.println(e);
 		}
-		
-		
+
+
 	}
 
 	private Object File(String tempPath) {
