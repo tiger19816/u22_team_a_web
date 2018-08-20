@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Dao.Dao;
+import DAO.Dao;
 
 /**
  * 距離測定クラス。
