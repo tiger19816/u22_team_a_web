@@ -28,7 +28,23 @@ public class Dao {
 			throw e;
 		}
 	}
+	public void read(String sql)throws SQLException{
+		try{
 
+			this.rs = st.executeQuery(sql);
+
+		}catch(SQLException e){
+		}
+	}
+	public void upgrade(String sql)throws SQLException{
+		try{
+
+			st.executeUpdate(sql);
+
+		}catch(SQLException e){
+			throw e;
+		}
+	}
 	 public ResultSet execute(String sql)throws SQLException{
 	        try{
 	            System.out.println(sql);
