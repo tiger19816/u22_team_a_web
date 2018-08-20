@@ -27,22 +27,6 @@ public class Dao {
 		}
 	}
 
-	public void close() throws SQLException{
-		try {
-			if(rs != null) {
-				rs.close();
-			}
-			if(st != null) {
-				st.close();
-			}
-			if(cn != null) {
-				cn.close();
-			}
-		}catch(SQLException e) {
-			throw e;
-		}
-	}
-
 	public void read(String sql)throws SQLException{
 		try{
 
@@ -68,14 +52,13 @@ public class Dao {
 			if(st != null){
 				st.close();
 			}
-			if(con != null){
+			if(cn != null){
 				st.close();
 			}
 		}catch(SQLException e){
 
 		}
-
-
+	}
 }
 
 
