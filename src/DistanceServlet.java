@@ -1,8 +1,9 @@
-package Distance;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import hal.u22.works.team.a.distance.Distance;
 
 
 
@@ -39,8 +42,10 @@ public class DistanceServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		//現在地の緯度・経度
-		float lat = Float.parseFloat(request.getParameter(""));
-		float lng = Float.parseFloat(request.getParameter(""));
+		//float lat = Float.parseFloat(request.getParameter(""));
+		//float lng = Float.parseFloat(request.getParameter(""));
+		float lat = (float) 1;
+		float lng = (float) 1;
 
 		response.setContentType("application/json; charset=UTF-8");
 		//PrintWriter out = response.getWriter();
@@ -50,7 +55,7 @@ public class DistanceServlet extends HttpServlet {
 		//out.println("true");
 		//out.println("}");
 		try {
-			ArrayList<ArrayList<String>> point = new ArrayList<ArrayList<String>>();
+			ArrayList<Map<String, String>> point = new ArrayList<Map<String, String>>();
 			Distance d = new Distance();
 			point = d.getPoint(lat, lng);
 			request.setAttribute("result", point);

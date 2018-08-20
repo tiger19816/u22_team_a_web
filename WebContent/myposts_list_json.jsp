@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="entities.*" %>
+<%@ page import="hal.u22.works.team.a.entities.Posts"%>
 <%@ page import="java.util.*" %>
 <%
 ArrayList<Posts> postsList = (ArrayList<Posts>)request.getAttribute("LIST");
