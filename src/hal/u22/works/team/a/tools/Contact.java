@@ -1,4 +1,4 @@
-package DAO;
+package hal.u22.works.team.a.tools;
 
 /**
  * お問い合わせ内容テーブルの中身を入れるクラス

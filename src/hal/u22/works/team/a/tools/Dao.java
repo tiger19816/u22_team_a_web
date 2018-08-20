@@ -1,4 +1,4 @@
-package DAO;
+package hal.u22.works.team.a.tools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
