@@ -3,8 +3,10 @@ package Distance;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import Dao.Dao;
+import DAO.Dao;
 
 /**
  * 距離測定クラス。
@@ -42,8 +44,9 @@ public class Distance extends Dao{
 	    return (float) distance;
 	}
 
-	public ArrayList<ArrayList<String>> getPoint(float lat,float lng)  throws SQLException{
-		ArrayList<ArrayList<String>> point = new ArrayList<ArrayList<String>>();
+	public ArrayList<Map<String, String>> getPoint(float lat,float lng)  throws SQLException{
+//		ArrayList<ArrayList<String>> point = new ArrayList<ArrayList<String>>();
+		ArrayList<Map<String, String>> point = new ArrayList<Map<String, String>>();
 
 		String sql = "SELECT * FROM posts WHERE latitude BETWEEN ?-0.00901 AND ?+0.00901 AND longitude BETWEEN ?-0.010966 AND ?+0.010966;";
 		st = cn.prepareStatement(sql);
@@ -53,39 +56,66 @@ public class Distance extends Dao{
 		st.setFloat(4,lng);
 		rs = st.executeQuery();
 		while(rs.next()) {
-			ArrayList<String> rec = new ArrayList<String>();
-			rec.add("{");
+			Map<String, String> rec = new HashMap<String, String>();
+			rec.put("point_no", rs.getString("point_no"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("title", rs.getString("title"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("money", rs.getString("money"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("place", rs.getString("place"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("latitude", rs.getString("latitude"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("longitude", rs.getString("longitude"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("content", rs.getString("content"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("phote", rs.getString("phote"));
+			//point.add(rec);
+			//rec = new HashMap<String, String>();
+			rec.put("target_money", rs.getString("target_money"));
+//			ArrayList<String> rec = new ArrayList<String>();
+//			rec.add("{");
+//			point.add(rec);
+//			ArrayList<String> rec1 = new ArrayList<String>();
+//			rec.add("\"point_no\""+":"+"\""+rs.getString("point_no")+"\"");
+//			point.add(rec1);
+//			ArrayList<String> rec2 = new ArrayList<String>();
+//			rec.add("\"title\""+":"+"\""+rs.getString("title")+"\"");
+//			point.add(rec2);
+//			ArrayList<String> rec3 = new ArrayList<String>();
+//			rec.add("\"money\""+":"+"\""+rs.getString("money")+"\"");
+//			point.add(rec3);
+//			ArrayList<String> rec4 = new ArrayList<String>();
+//			rec.add("\"place\""+":"+"\""+rs.getString("place")+"\"");
+//			point.add(rec4);
+//			ArrayList<String> rec5 = new ArrayList<String>();
+//			rec.add("\"latitude\""+":"+"\""+rs.getString("latitude")+"\"");
+//			point.add(rec5);
+//			ArrayList<String> rec6 = new ArrayList<String>();
+//			rec.add("\"longitude\""+":"+"\""+rs.getString("longitude")+"\"");
+//			point.add(rec6);
+//			ArrayList<String> rec7 = new ArrayList<String>();
+//			rec.add("\"content\""+":"+"\""+rs.getString("content")+"\"");
+//			point.add(rec7);
+//			ArrayList<String> rec8 = new ArrayList<String>();
+//			rec.add("\"photo\""+":"+"\""+rs.getString("phote")+"\"");
+//			point.add(rec8);
+//			ArrayList<String> rec9 = new ArrayList<String>();
+//			rec.add("\"target_money\""+":"+"\""+rs.getString("target_money")+"\"");
+//			point.add(rec9);
+//			ArrayList<String> rec10 = new ArrayList<String>();
+//			rec.add("}");
+//			point.add(rec10);
 			point.add(rec);
-			ArrayList<String> rec1 = new ArrayList<String>();
-			rec.add("\"point_no\""+":"+"\""+rs.getString("point_no")+"\"");
-			point.add(rec1);
-			ArrayList<String> rec2 = new ArrayList<String>();
-			rec.add("\"title\""+":"+"\""+rs.getString("title")+"\"");
-			point.add(rec2);
-			ArrayList<String> rec3 = new ArrayList<String>();
-			rec.add("\"money\""+":"+"\""+rs.getString("money")+"\"");
-			point.add(rec3);
-			ArrayList<String> rec4 = new ArrayList<String>();
-			rec.add("\"place\""+":"+"\""+rs.getString("place")+"\"");
-			point.add(rec4);
-			ArrayList<String> rec5 = new ArrayList<String>();
-			rec.add("\"latitude\""+":"+"\""+rs.getString("latitude")+"\"");
-			point.add(rec5);
-			ArrayList<String> rec6 = new ArrayList<String>();
-			rec.add("\"longitude\""+":"+"\""+rs.getString("longitude")+"\"");
-			point.add(rec6);
-			ArrayList<String> rec7 = new ArrayList<String>();
-			rec.add("\"content\""+":"+"\""+rs.getString("content")+"\"");
-			point.add(rec7);
-			ArrayList<String> rec8 = new ArrayList<String>();
-			rec.add("\"photo\""+":"+"\""+rs.getString("phote")+"\"");
-			point.add(rec8);
-			ArrayList<String> rec9 = new ArrayList<String>();
-			rec.add("\"target_money\""+":"+"\""+rs.getString("target_money")+"\"");
-			point.add(rec9);
-			ArrayList<String> rec10 = new ArrayList<String>();
-			rec.add("}");
-			point.add(rec10);
 		}
 		return point;
 	}
