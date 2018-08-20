@@ -38,7 +38,7 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
     	response.setCharacterEncoding("UTF-8");
     	
     	//--------------変数宣言------------------
-		String flagNum = request.getParameter("flag");
+		String flagNum = request.getParameter("flagNum");
     	ArrayList<AchievementListScreenInfo> arrayAchive=	new ArrayList<AchievementListScreenInfo>(); 
 		String strJspName = ""; 
     			
@@ -51,7 +51,7 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
 			arrayAchive = da.getPostsAllTable(flagNum);
 			
 			if("1".equals(flagNum)) {
-				strJspName ="" ;
+				strJspName ="certainAmountAchievementScreen.jsp" ;
 			}
 			
 		}catch (Exception e) {
