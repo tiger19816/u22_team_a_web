@@ -15,7 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD
     /**
+=======
+	/**
+>>>>>>> parent of 7d4f69b... commit (#17)
      * @see HttpServlet#HttpServlet()
      */
     public TestServlet() {
