@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import hal.u22.works.team.a.achievement.list.screen.AchievementListScreenInfo;
+import hal.u22.works.team.a.web.tools.Dao;
 
 public class DataAccess extends Dao {
 
