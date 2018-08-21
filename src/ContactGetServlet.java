@@ -39,7 +39,8 @@ public class ContactGetServlet extends HttpServlet {
 
 		//お問い合わせの内容と名前を受け取る
 
-		String noStr = request.getParameter("no");
+		//String noStr = request.getParameter("no");
+		String noStr = "12345";
 		String contentStr = request.getParameter("content");
 
 		//今日の日付の取得
@@ -88,7 +89,7 @@ public class ContactGetServlet extends HttpServlet {
 
 		//アンドロイド側に実行結果を返す
 		//********************************************
-		
+
 
 		//*******************************************
 	}

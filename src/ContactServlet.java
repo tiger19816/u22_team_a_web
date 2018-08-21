@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ import DAO.Sql;
 /**
  * Servlet implementation class ContactGetServlet
  */
-@WebServlet("/ContactGetServlet")
+@WebServlet("/ContactServlet")
 public class ContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,19 +40,42 @@ public class ContactServlet extends HttpServlet {
 
 		//お問い合わせの内容と名前を受け取る
 
+System.out.println("サーバー");
 
 
 		//仮の値*******************************************
 		int member_no = 12345;
-		String content = "内容";
-		String date = "2018-07-24"; //今の日付
+		//String content = "内容";
+		//String date = "2018-08-24"; //今の日付
 		//****************************************************
 
-		//値をContactクラスに入れる
-		Contact c = new Contact();
-		c.setMember_no(member_no);
-		c.setContent(content);
-		c.setDate(date);
+
+		String content = (String)request.getAttribute("postData");
+
+		System.out.println(content);
+
+		//今日の日付の取得
+				Calendar cal = Calendar.getInstance();
+				int yearInt = cal.get(Calendar.YEAR);
+				int monthInt = cal.get(Calendar.MONTH);
+				int dateInt = cal.get(Calendar.DATE);
+
+				String yearStr = String.valueOf(yearInt);
+				String monthStr = String.valueOf(monthInt);
+				String dateStr = String.valueOf(dateInt);
+
+				String date = yearStr + "-" + monthStr + "-" + dateStr;
+				System.out.println(date);
+
+				//値をContactクラスに入れる
+				Contact c = new Contact();
+
+
+				c.setMember_no(member_no);
+				c.setContent(content);
+				c.setDate(date);
+
+
 
 		//true,falseの格納用
 		Boolean dbSuccess = false;
