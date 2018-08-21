@@ -1,4 +1,4 @@
-
+package hal.u22.works.team.a.web.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tool.PIDAO;
+import hal.u22.works.team.a.web.tools.ProjectInfoDao;
 
 /**
- * Servlet implementation class ProjectInfoServlet
+ * Servlet implementation class DonationSetServlet
  */
-@WebServlet("/ProjectInfoServlet")
-public class ProjectInfoServlet extends HttpServlet {
+@WebServlet("/DonationSetServlet")
+public class DonationSetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProjectInfoServlet() {
+    public DonationSetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,23 +36,19 @@ public class ProjectInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String id = request.getParameter("id");
-		String result = "";
-
-		PIDAO dao = null;
+		String donation = request.getParameter("donationMoney");
+		ProjectInfoDao dao = null;
 
 		try {
-			dao = new PIDAO();
-			result = dao.getProjectInfo(id);
+			dao = new ProjectInfoDao();
+			dao.setDonation(id, donation);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		request.setAttribute("result", result);
 		RequestDispatcher rd = request.getRequestDispatcher("ResultJSON.jsp");
 		rd.forward(request, response);
-
 	}
 
 	/**
