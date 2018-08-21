@@ -62,7 +62,7 @@ public class UserLoginServlet extends HttpServlet {
 			System.out.println(count);
 			if(count != 0){
 				request.setAttribute("result","true");
-		//		request.setAttribute("userId", userId);		//ユーザーID使わなければ削除
+				request.setAttribute("userId", userId);
 			}else{
 				request.setAttribute("result","false");
 			}
