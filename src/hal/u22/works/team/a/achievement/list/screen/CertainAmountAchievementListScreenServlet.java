@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.DataAccess;
-
+import hal.u22.works.team.a.web.tools.DataAccess;
 /**
  * Servlet implementation class CertainAmountAchievementListScreenServlet
  */
@@ -38,9 +37,14 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
     	response.setCharacterEncoding("UTF-8");
     	
     	//--------------変数宣言------------------
-		String flagNum = request.getParameter("flagNum");
+		String flagNum ="";
+		if(null ==  request.getParameter("flagNum")) {
+			flagNum = request.getParameter("flagNum");
+		}else {
+			flagNum = (String)request.getAttribute("flagNum");
+		}
     	ArrayList<AchievementListScreenInfo> arrayAchive=	new ArrayList<AchievementListScreenInfo>(); 
-		String strJspName = ""; 
+		String strJspName = "TargetAmountAchievementListScreen.jsp"; 
     			
 		//--------------処理--------------------------
 		try {

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.DataAccess;
+import hal.u22.works.team.a.web.tools.DataAccess;
 
 /**
  * Servlet implementation class CertainAmountAchievementDetailScreenServlet
@@ -52,7 +52,7 @@ public class CertainAmountAchievementDetailScreenServlet extends HttpServlet {
 			achive = da.getPostsTable(no ,flagNum);
 			
 			if("1".equals(flagNum)){
-				strJspName = "";
+				strJspName = "certainAmountAchievementDetailScreen.jsp";
 			}
 		}catch (Exception e) {
 			// TODO: handle exception

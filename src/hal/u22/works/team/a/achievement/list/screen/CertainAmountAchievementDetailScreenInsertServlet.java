@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.DataAccess;
+import hal.u22.works.team.a.web.tools.DataAccess;
 
 /**
  * Servlet implementation class CertainAmountAchievementDetailScreenInsertServlet
@@ -41,23 +41,23 @@ public class CertainAmountAchievementDetailScreenInsertServlet extends HttpServl
     	String no = request.getParameter("no");
 		String flagNum = request.getParameter("flagNum");
 		String money ="";
-		String strJspName = ""; 
-    			
+		String strJspName = "./CertainAmounAchievmentListScreenServlet";
+    	
 		//--------------処理--------------------------
 		try {
 			
 			//DAOのコンストラクト呼び出し
 			DataAccess da = new DataAccess();
 			//ラスの値を格納
-			if("2".equals(flagNum)) {
-				flagNum = "3";
+			if("1".equals(flagNum)) {
+				flagNum = "2";
 				money = request.getParameter("money");
 				da.UpdateCleuningFlag(no ,flagNum, money);
-				strJspName = "";
+				request.setAttribute("flagNum", "1");
 			}else {
 				flagNum = "4";
 				da.UpdateCleuningFlag(no, flagNum);
-				strJspName = "";
+				request.setAttribute("flagNum", "3");
 			}
 			
 		}catch (Exception e) {
