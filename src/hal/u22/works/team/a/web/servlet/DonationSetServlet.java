@@ -1,16 +1,6 @@
 package hal.u22.works.team.a.web.servlet;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import hal.u22.works.team.a.web.tools.ProjectInfoDao;
+import src.hal.u22.works.team.a.web.tools.ProjectInfoDao;
 
 /**
  * Servlet implementation class DonationSetServlet
@@ -35,13 +25,14 @@ public class DonationSetServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("utf-8");
 
-		String id = request.getParameter("id");
+		String projectNo = request.getParameter("projectNo");
+		String memberNo = request.getParameter("memberNo");
 		String donation = request.getParameter("donationMoney");
 		ProjectInfoDao dao = null;
 
 		try {
 			dao = new ProjectInfoDao();
-			dao.setDonation(id, donation);
+			dao.setDonation(projectNo, memberNo, donation);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

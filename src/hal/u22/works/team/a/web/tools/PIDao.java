@@ -1,9 +1,9 @@
-package hal.u22.works.team.a.web.tools;
+package src.hal.u22.works.team.a.web.tools;
 
 
-public class ProjectInfoDao extends Dao{
+public class PIDao extends Dao{
 
-	public ProjectInfoDao() throws SQLException, ClassNotFoundException{
+	public PIDao() throws SQLException, ClassNotFoundException{
 		super();
 	}
 
