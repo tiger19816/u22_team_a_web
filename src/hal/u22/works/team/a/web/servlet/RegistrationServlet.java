@@ -1,4 +1,4 @@
-
+package hal.u22.works.team.a.web.servlet;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.Dao;
+import hal.u22.works.team.a.web.tools.Dao;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -31,8 +31,6 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 		//文字化け対策
 		request.setCharacterEncoding("utf-8");
 
@@ -123,8 +121,6 @@ public class RegistrationServlet extends HttpServlet {
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("RegistrationJson.jsp");
 		rd.forward(request, response);
-
-
 	}
 
 	/**
