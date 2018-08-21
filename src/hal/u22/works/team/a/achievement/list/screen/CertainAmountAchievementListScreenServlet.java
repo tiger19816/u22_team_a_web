@@ -31,14 +31,13 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		//--------------文字化け対策-----------------------
     	request.setCharacterEncoding("UTF-8");
     	response.setCharacterEncoding("UTF-8");
     	
     	//--------------変数宣言------------------
 		String flagNum ="";
-		if(null ==  request.getParameter("flagNum")) {
+		if(null !=  request.getParameter("flagNum")) {
 			flagNum = request.getParameter("flagNum");
 		}else {
 			flagNum = (String)request.getAttribute("flagNum");
@@ -62,7 +61,7 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
 			// TODO: handle exception
 		}
 		
-		request.setAttribute("arrayTable", arrayAchive);
+		request.setAttribute("arrayAchive", arrayAchive);
         RequestDispatcher rd = request.getRequestDispatcher(strJspName);
         rd.forward(request,response);
 	}

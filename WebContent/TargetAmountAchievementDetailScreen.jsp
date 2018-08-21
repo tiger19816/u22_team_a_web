@@ -28,6 +28,9 @@
 	<input type="hidden" name="flagNum" value="3" >
 	<input type="hidden" name="no" value="<%= achivement.getNo() %>">
 </form>
-	
+
+<div id ="backpage">
+	<a href="javascript:history.back()">戻る</a>
+</div>	
 </body>
 </html>

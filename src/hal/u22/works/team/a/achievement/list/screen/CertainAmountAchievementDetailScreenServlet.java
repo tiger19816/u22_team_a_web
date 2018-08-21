@@ -32,7 +32,6 @@ public class CertainAmountAchievementDetailScreenServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		//--------------文字化け対策-----------------------
     	request.setCharacterEncoding("UTF-8");
     	response.setCharacterEncoding("UTF-8");
@@ -41,7 +40,7 @@ public class CertainAmountAchievementDetailScreenServlet extends HttpServlet {
     	String no = request.getParameter("no");
 		String flagNum = request.getParameter("flagNum");
     	AchievementListScreenInfo achive=	new AchievementListScreenInfo(); 
-		String strJspName = ""; 
+		String strJspName = "TargetAmountAchievementDetailScreen.jsp"; 
     			
 		//--------------処理--------------------------
 		try {

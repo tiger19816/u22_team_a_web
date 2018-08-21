@@ -21,11 +21,16 @@
 		<tr><th>投稿日</th><td><%=achivement.getPostDate() %></td></tr>
 		<tr><th>内容</th><td><%=achivement.getContent() %></td></tr>
 		<tr><th>写真</th><td><%=achivement.getPhoto() %></td></tr>
-		<tr><th>集計金額</th><td></td><%=achivement.getPostMoney() %></tr>
-		<tr><th>目標金額の設定</th><td><input type="text" value="money"></td></tr>
+		<tr><th>集計金額</th><td><%=achivement.getPostMoney() %></td></tr>
+		<tr><th>目標金額の設定</th><td><input type="text" name="money"></td></tr>
 	</table>
 	<input type="hidden" name="flagNum" value="1" >
 	<input type="hidden" name="no" value="<%= achivement.getNo() %>">
+	<input type="submit" value="目標金額の登録">
 </form>
+
+<div id ="backpage">
+	<a href="javascript:history.back()">戻る</a>
+</div>
 </body>
 </html>

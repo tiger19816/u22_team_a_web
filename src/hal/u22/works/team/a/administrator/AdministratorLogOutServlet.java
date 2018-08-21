@@ -1,4 +1,4 @@
-package hal.u22.works.team.a.achievement.list.screen;
+package hal.u22.works.team.a.administrator;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import hal.u22.works.team.a.web.tools.DataAccess;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class CertainAmountAchievementDetailScreenInsertServlet
+ * Servlet implementation class AdministratorLogOutServlet
  */
-@WebServlet("/CertainAmountAchievementDetailScreenInsertServlet")
-public class CertainAmountAchievementDetailScreenInsertServlet extends HttpServlet {
+@WebServlet("/AdministratorLogOutServlet")
+public class AdministratorLogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CertainAmountAchievementDetailScreenInsertServlet() {
+    public AdministratorLogOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,37 +30,16 @@ public class CertainAmountAchievementDetailScreenInsertServlet extends HttpServl
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		//--------------文字化け対策-----------------------
     	request.setCharacterEncoding("UTF-8");
     	response.setCharacterEncoding("UTF-8");
     	
-    	//--------------変数宣言------------------
-    	String no = request.getParameter("no");
-		String flagNum = request.getParameter("flagNum");
-		String money ="";
-		String strJspName = "./AdministratorTopServlet";
-    	
-		//--------------処理--------------------------
-		try {
-			
-			//DAOのコンストラクト呼び出し
-			DataAccess da = new DataAccess();
-			//ラスの値を格納
-			if("1".equals(flagNum)) {
-				flagNum = "2";
-				money = request.getParameter("money");
-				da.UpdateCleuningFlag(no ,flagNum, money);
-				request.setAttribute("flagNum", "1");
-			}else {
-				flagNum = "4";
-				da.UpdateCleuningFlag(no, flagNum);
-				request.setAttribute("flagNum", "3");
-			}
-			
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
+    	//------------変数宣言------------------
+		String strJspName ="./AdministratorLoginIndexServlet";
+		
+		//-----------セッションの取得＆初期化
+		HttpSession session = request.getSession(true);
+		session.invalidate();
 		
         RequestDispatcher rd = request.getRequestDispatcher(strJspName);
         rd.forward(request,response);

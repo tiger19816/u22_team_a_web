@@ -116,7 +116,7 @@ public class DataAccess extends Dao {
 		//取得した値の格納先
 		ArrayList<AchievementListScreenInfo> table = new ArrayList<AchievementListScreenInfo>();
 		//SQL文の作成
-		String sql = "select no, title, place, post_date from posts where cleuning_flag = " + flagNum + " order by post_date ASC" ;
+		String sql = "select no, title, place, post_date from posts where cleaning_flag = " + flagNum + " order by post_date ASC" ;
 		System.out.println(sql);
 		//SQLの発行
 		try {
@@ -125,11 +125,15 @@ public class DataAccess extends Dao {
 				AchievementListScreenInfo list = new AchievementListScreenInfo();
 				list.setNo(rs.getString("no"));
 				list.setTitle(rs.getString("title"));
-				list.setPlace(rs.getString("post_place"));
+				list.setPlace(rs.getString("place"));
+				list.setPostDate(rs.getString("post_date"));
 				table.add(list);
 			}
+			System.out.println("終わり");
 		}catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("エラー");
+			System.out.println(e);
 		}
 		return  table;
 	}
@@ -148,9 +152,9 @@ public class DataAccess extends Dao {
 		AchievementListScreenInfo list = new AchievementListScreenInfo();
 		//SQL文の作成
 		String sql = "select posts.no, posts.title, posts.place, posts.post_date, posts.content, posts.photo, (posts.post_money + assists.add_money) as money, target_money from posts "
-				+ "inner join (SELECT post_no, sum(assist_money) as add_money from assists GROUP by post_no) as assists"
+				+ "inner join (SELECT post_no, sum(assist_money) as add_money from assists GROUP by post_no) as assists "
 				+ "on assists.post_no = posts.no "
-				+ "where cleuning_flag = " + flagNum + " and posts.no =" + no +" order by post_date ASC" ;
+				+ "where cleaning_flag = " + flagNum + " and posts.no =" + no +" order by post_date ASC" ;
 		System.out.println(sql);
 		//SQLの発行
 		try {
@@ -158,7 +162,7 @@ public class DataAccess extends Dao {
 			while(rs.next()) {
 				list.setNo(rs.getString("posts.no"));
 				list.setTitle(rs.getString("posts.title"));
-				list.setPlace(rs.getString("posts.post_place"));
+				list.setPlace(rs.getString("posts.place"));
 				list.setPostDate(rs.getString("posts.post_date"));
 				list.setContent(rs.getString("posts.content"));
 				list.setPhoto(rs.getString("posts.photo"));
@@ -167,6 +171,9 @@ public class DataAccess extends Dao {
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("エラー");
+			System.out.println(e);
+
 		}
 		return  list;
 	}
@@ -181,7 +188,7 @@ public class DataAccess extends Dao {
 	
 	public void UpdateCleuningFlag(String no, String flagNum) {
 		//SQL文の作成
-		String sql = "update posts set cleuning_flag = " + flagNum + " where no = " + no; 
+		String sql = "update posts set cleaning_flag = " + flagNum + " where no = " + no; 
 		System.out.println(sql);
 		//SQLの発行
 		try {
@@ -202,7 +209,7 @@ public class DataAccess extends Dao {
 	
 	public void UpdateCleuningFlag(String no, String flagNum, String money) {
 		//SQL文の作成
-		String sql = "update posts set cleuning_flag = " + flagNum + ", target_money = " + money + " where no = " + no; 
+		String sql = "update posts set cleaning_flag = " + flagNum + ", target_money = " + money + " where no = " + no; 
 		System.out.println(sql);
 		//SQLの発行
 		try {
@@ -213,8 +220,50 @@ public class DataAccess extends Dao {
 		}
 	}
 	
+	/**
+	 * 管理者ID、パスワードを使いログインできるかを確認する。
+	 * 
+	 * @param id
+	 * @param pass
+	 * @return
+	 */
+	public boolean CheckAdminAccess(String id, String pass) {
+		//SQL文作成
+		String sql = "Select * from administrators where id = '" + id + "' and password = '" + pass + "'";
+		System.out.println(sql);
+		try {
+			rs = st.executeQuery(sql);
+			rs.last();
+			int count = rs.getRow();
+			rs.beforeFirst();
+			
+			if(count == 0) {
+				return false;
+			}
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+		
+		return true;
+	}
 	
-	
+	public String GetAdminName(String id, String pass) {
+		//SQL文作成
+		String sql = "Select name from administrators where id = '" + id + "' and password = '" + pass + "'";
+		String name="";
+		System.out.println(sql);
+		try {
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				name = rs.getString("name");
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}		
+		return name;
+	}
 
 
 }
