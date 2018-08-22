@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hal.u22.works.team.a.web.entities.Page;
 import hal.u22.works.team.a.web.tools.DataAccess;
 /**
  * Servlet implementation class CertainAmountAchievementListScreenServlet
@@ -44,14 +45,24 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
 		}
     	ArrayList<AchievementListScreenInfo> arrayAchive=	new ArrayList<AchievementListScreenInfo>(); 
 		String strJspName = "TargetAmountAchievementListScreen.jsp"; 
+		int max = 0;
+		Page p = new Page();
     			
 		//--------------処理--------------------------
 		try {
 			
 			//DAOのコンストラクト呼び出し
 			DataAccess da = new DataAccess();
+			//ページング
+			max = da.Max(flagNum);
+			p.setPageNum(max);
+			String page = (String)request.getParameter("id");
+			if(page == null) {
+				page = "1";
+			}
+			p.setNowPage(page);
 			//array＊クラスの値を格納
-			arrayAchive = da.getPostsAllTable(flagNum);
+			arrayAchive = da.getPostsAllTable(flagNum,p.getFirstRecode());
 			
 			if("1".equals(flagNum)) {
 				strJspName ="certainAmountAchievementScreen.jsp" ;
@@ -60,7 +71,8 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
+		request.setAttribute("PAGE", p);
 		request.setAttribute("arrayAchive", arrayAchive);
         RequestDispatcher rd = request.getRequestDispatcher(strJspName);
         rd.forward(request,response);

@@ -112,11 +112,12 @@ public class DataAccess extends Dao {
 	 * @return
 	 */
 	
-	public ArrayList<AchievementListScreenInfo> getPostsAllTable(String flagNum){
+	public ArrayList<AchievementListScreenInfo> getPostsAllTable(String flagNum , int num){
 		//取得した値の格納先
 		ArrayList<AchievementListScreenInfo> table = new ArrayList<AchievementListScreenInfo>();
 		//SQL文の作成
-		String sql = "select no, title, place, post_date from posts where cleaning_flag = " + flagNum + " order by post_date ASC" ;
+		String sql = "select no, title, place, post_date from posts where cleaning_flag = "+flagNum+"\n" + 
+				"ORDER BY post_date ASC LIMIT "+num+" , 10 " ;
 		System.out.println(sql);
 		//SQLの発行
 		try {
@@ -263,6 +264,21 @@ public class DataAccess extends Dao {
 			// TODO: handle exception
 		}		
 		return name;
+	}
+
+	//データベースのレコード数を抽出
+	public int Max(String flagNum) throws SQLException{
+		try {
+			String sql = "SELECT COUNT(*) FROM posts where cleaning_flag = " + flagNum + "";
+			rs = st.executeQuery(sql);
+			int max = 0; 
+			if(rs.next()) {
+				max = rs.getInt("COUNT(*)");
+			}
+			return max;
+		}catch(SQLException e) {
+			throw e;
+		}
 	}
 
 
