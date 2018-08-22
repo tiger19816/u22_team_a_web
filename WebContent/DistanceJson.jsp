@@ -11,15 +11,19 @@ int cnt =0;
       ,
    <%}%>
    {
-   "point_no":"<%=a.get("point_no")%>"
-   "title":"<%=a.get("title")%>"
-   "money":"<%=a.get("money")%>"
+   "no":"<%=a.get("no")%>"
+   "member_no":"<%=a.get("member_no")%>"
+   "category_no":"<%=a.get("category_no")%>"
+   "post_date":"<%=a.get("post_date")%>"
+   "post_money":"<%=a.get("post_money")%>"
    "place":"<%=a.get("place")%>"
    "latitude":"<%=a.get("latitude")%>"
    "longitude":"<%=a.get("longitude")%>"
+   "title":"<%=a.get("title")%>"
    "content":"<%=a.get("content")%>"
-   "phote":"<%=a.get("phote")%>"
+   "photo":"<%=a.get("photo")%>"
    "target_money":"<%=a.get("target_money")%>"
+   "cleaning_flag":"<%=a.get("cleaning_flag")%>"
    }
 <%cnt++;%>
 <%}%>
