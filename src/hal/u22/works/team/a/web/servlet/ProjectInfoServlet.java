@@ -36,7 +36,6 @@ public class ProjectInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String no = request.getParameter("no");
-		String url = request.getParameter("url");
 		String result = "";
 
 		ProjectInfoDao dao = null;
