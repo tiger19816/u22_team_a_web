@@ -105,7 +105,7 @@ public class RegistrationServlet extends HttpServlet {
 				user_information_sql += "'"+ userBirthdate +"','"+ userPassword +"','"+ userPhone +"',"+ userCreditNo +");";
 
 				dao.executeUpdate(user_information_sql);	//ユーザー情報登録
-				dao.execute(new_user_no_sql);
+				dao.execute(new_user_no_sql);	//新規登録されたユーザーID
 				System.out.println("ユーザー登録完了");
 				while(rs.next()) {
 					userId = rs.getInt("no");
