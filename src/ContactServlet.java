@@ -40,8 +40,7 @@ public class ContactServlet extends HttpServlet {
 
 		//お問い合わせの内容と名前を受け取る
 
-System.out.println("サーバー");
-
+		System.out.println("サーバー");
 
 		//仮の値*******************************************
 		int member_no = 12345;
@@ -49,33 +48,32 @@ System.out.println("サーバー");
 		//String date = "2018-08-24"; //今の日付
 		//****************************************************
 
-
-		String content = (String)request.getAttribute("postData");
+		String content = (String) request.getParameter("content");
 
 		System.out.println(content);
 
 		//今日の日付の取得
-				Calendar cal = Calendar.getInstance();
-				int yearInt = cal.get(Calendar.YEAR);
-				int monthInt = cal.get(Calendar.MONTH);
-				int dateInt = cal.get(Calendar.DATE);
+		Calendar cal = Calendar.getInstance();
+		int yearInt = cal.get(Calendar.YEAR);
+		int monthInt = cal.get(Calendar.MONTH) + 1;
+		int dateInt = cal.get(Calendar.DATE);
 
-				String yearStr = String.valueOf(yearInt);
-				String monthStr = String.valueOf(monthInt);
-				String dateStr = String.valueOf(dateInt);
+		String yearStr = String.valueOf(yearInt);
+		String monthStr = String.valueOf(monthInt);
+		String dateStr = String.valueOf(dateInt);
 
-				String date = yearStr + "-" + monthStr + "-" + dateStr;
-				System.out.println(date);
+		String date = yearStr + "-" + monthStr + "-" + dateStr;
+		System.out.println(date);
 
-				//値をContactクラスに入れる
-				Contact c = new Contact();
+		//値をContactクラスに入れる
+		Contact c = new Contact();
 
+		c.setMember_no(member_no);
+		c.setContent(content);
+		c.setDate(date);
 
-				c.setMember_no(member_no);
-				c.setContent(content);
-				c.setDate(date);
-
-
+		System.out.println(c.getContent());
+		System.out.println(c.getDate());
 
 		//true,falseの格納用
 		Boolean dbSuccess = false;
@@ -84,7 +82,10 @@ System.out.println("サーバー");
 		Sql s = null;
 
 		try {
+
 			s = new Sql();
+			System.out.println("sql");
+
 			s.insertContentNew(c);
 			dbSuccess = true;
 		} catch (Exception e) {
@@ -93,22 +94,22 @@ System.out.println("サーバー");
 
 		} finally {
 			try {
-				s.close();
+				if (s != null) {
+					s.close();
+				}
 			} catch (Exception e) {
 				System.out.println("Exception e  2");
 			}
 
 		}
 
-
 		//JSPファイルにDB登録成功の結果を渡す
 		//****************************************:
 
 		request.setAttribute("result", "true");
 
-
-	RequestDispatcher rd = request.getRequestDispatcher("loginJson.jsp");
-	rd.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("loginJson.jsp");
+		rd.forward(request, response);
 
 	}
 
