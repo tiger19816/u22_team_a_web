@@ -38,10 +38,10 @@ public class DistanceServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		//現在地の緯度・経度
-		//double lat = Double.parseDouble(request.getParameter(""));
-		//double lat = Double.parseDouble(request.getParameter(""));
-		double lat = (double) 121;
-		double lng = (double) 33;
+		double lat = Double.parseDouble(request.getParameter("lat"));
+		double lng = Double.parseDouble(request.getParameter("lng"));
+//		double lat = (double) 121;
+//		double lng = (double) 33;
 
 		response.setContentType("application/json; charset=UTF-8");
 
