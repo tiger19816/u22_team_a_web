@@ -35,14 +35,14 @@ public class ProjectInfoServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("utf-8");
 
-		String id = request.getParameter("id");
+		String no = request.getParameter("no");
 		String result = "";
 
 		ProjectInfoDao dao = null;
 
 		try {
 			dao = new ProjectInfoDao();
-			result = dao.getProjectInfo(id);
+			result = dao.getProjectInfo(no);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

@@ -35,13 +35,14 @@ public class DonationSetServlet extends HttpServlet {
 		//文字化け対策
 		request.setCharacterEncoding("utf-8");
 
-		String id = request.getParameter("id");
+		String projectNo = request.getParameter("projectNo");
+		String memberNo = request.getParameter("memberNo");
 		String donation = request.getParameter("donationMoney");
 		ProjectInfoDao dao = null;
 
 		try {
 			dao = new ProjectInfoDao();
-			dao.setDonation(id, donation);
+			dao.setDonation(projectNo, memberNo, donation);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

@@ -4,6 +4,6 @@
 	String userId = (String)request.getAttribute("userId");
 %>
 {
-	"result":<%= str %>
+	"result":<%= str %>,
 	"userId":<%= userId %>
 }
