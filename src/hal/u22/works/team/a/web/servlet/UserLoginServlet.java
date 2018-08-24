@@ -49,7 +49,7 @@ public class UserLoginServlet extends HttpServlet {
         System.out.println(sql);
 
         //ログインユーザーの名前を取得
-        String user_name_sql = "select name from members where mail_address = "+ userMail +" AND password = "+ userPassword +";";
+        String user_name_sql = "select name from members where mail_address = '"+ userMail +"' AND password = '"+ userPassword +"';";
 
         //DBに接続
         Dao dao = null;
