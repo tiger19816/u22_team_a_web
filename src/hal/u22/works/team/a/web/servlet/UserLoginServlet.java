@@ -41,11 +41,15 @@ public class UserLoginServlet extends HttpServlet {
         String userPassword = request.getParameter("password");
         int count = 0;
         int userId = 0;
+        String userName = "";
 
         //ユーザー情報が登録されているかを検索するSQL
         String sql = "select no,count(*) from members ";
         sql += "where mail_address = '" + userMail + "' AND password = '" + userPassword + "';";
         System.out.println(sql);
+
+        //ログインユーザーの名前を取得
+        String user_name_sql = "select name from members where mail_address = '"+ userMail +"' AND password = '"+ userPassword +"';";
 
         //DBに接続
         Dao dao = null;
@@ -59,9 +63,14 @@ public class UserLoginServlet extends HttpServlet {
                 userId = rs.getInt("no");
             }
             System.out.println(count);
+            rs = dao.execute(user_name_sql);
+            while(rs.next()){
+            	userName = rs.getString("name");
+            }
             if (count != 0) {
                 request.setAttribute("result", "true");
                 request.setAttribute("userId", userId + ""); //ユーザーID使わなければ削除
+                request.setAttribute("userName", userName);
             } else {
                 request.setAttribute("result", "false");
             }

@@ -48,6 +48,7 @@ public class RegistrationServlet extends HttpServlet {
 
 		int userCreditNo = 0;
 		int count = 0;
+		int userId = 0;
 		int securityCode = Integer.parseInt(userCreditSecurityCode);
 
 		System.out.println("ユーザー名 = "+ userName);
@@ -73,6 +74,8 @@ public class RegistrationServlet extends HttpServlet {
 		//ユーザークレジットカードno取得SQL
 		String user_credit_no_sql = "select no from cards where number = '"+ userCredit +"' and security_code = "+ securityCode +"";
 
+		//登録したユーザーのno取得SQL
+		String new_user_no_sql ="select MAX(no) from members;";
 
 		//DB接続
 		Dao  dao = null;
@@ -102,8 +105,13 @@ public class RegistrationServlet extends HttpServlet {
 				user_information_sql += "'"+ userBirthdate +"','"+ userPassword +"','"+ userPhone +"',"+ userCreditNo +");";
 
 				dao.executeUpdate(user_information_sql);	//ユーザー情報登録
+				dao.execute(new_user_no_sql);	//新規登録されたユーザーID
 				System.out.println("ユーザー登録完了");
+				while(rs.next()) {
+					userId = rs.getInt("no");
+				}
 
+				request.setAttribute("userId", userId);
 				request.setAttribute("result", "true");
 			}else{
 				System.out.println("既に登録されてました");
