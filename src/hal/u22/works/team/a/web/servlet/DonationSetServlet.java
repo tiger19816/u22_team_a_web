@@ -1,5 +1,7 @@
 package hal.u22.works.team.a.web.servlet;
 
+import hal.u22.works.team.a.web.tools.ProjectInfoDao;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -9,8 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import hal.u22.works.team.a.web.tools.ProjectInfoDao;
 
 /**
  * Servlet implementation class DonationSetServlet
@@ -38,7 +38,9 @@ public class DonationSetServlet extends HttpServlet {
 		String projectNo = request.getParameter("projectNo");
 		String memberNo = request.getParameter("memberNo");
 		String donation = request.getParameter("donationMoney");
+		String result = "";
 		ProjectInfoDao dao = null;
+
 
 		try {
 			dao = new ProjectInfoDao();
@@ -48,6 +50,7 @@ public class DonationSetServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		request.setAttribute("result", result);
 		RequestDispatcher rd = request.getRequestDispatcher("ResultJSON.jsp");
 		rd.forward(request, response);
 	}

@@ -2,8 +2,10 @@
 <%
 	String str = (String)request.getAttribute("result");
 	String userId = (String)request.getAttribute("userId");
+	String userName = (String)request.getAttribute("userName");
 %>
 {
 	"result":<%= str %>,
-	"userId":<%= userId %>
+	"userId":<%= userId %>,
+	"userName":<%= userName %>
 }
