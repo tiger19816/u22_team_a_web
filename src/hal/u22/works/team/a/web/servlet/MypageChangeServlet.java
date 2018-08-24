@@ -38,34 +38,32 @@ public class MypageChangeServlet extends HttpServlet {
         //文字化け対策
         request.setCharacterEncoding("utf-8");
 
-        //		String mailAddress = request.getParameter("id");
-        //		String password = request.getParameter("password");
+       	String userId = request.getParameter("userId");
 
-        String mailAddress = "mail";
-        String password = "pass";
+       	//値を格納するための変数
+       	String no = "";//会員番号
+       	String name = "";//氏名
+       	String birthdate = "";//生年月日
+       	String address = "";//住所
+       	String sex = "";//性別
+       	String mail_address = "";//メールアドレス
+       	String phone = "";//電話番号
 
-        String[] memberInfo = { "", "", "", "", "", "", "" };
-
-        String sql = "SELECT no,name,birthdate,address,sex,mail_address,phone FROM members WHERE mail_addredss = '"
-                + mailAddress + "' && password = '" + password + "';";
+        String sql = "SELECT no,name,birthdate,address,sex,mail_address,phone FROM members WHERE no = '"
+                + userId + "';";
         Dao dao = null;
         ResultSet rs = null;
         try {
             dao = new Dao();
             rs = dao.execute(sql);
             if (rs.next()) {
-                String sex = "男";
-
-                memberInfo[0] = rs.getString("no");
-                memberInfo[1] = rs.getString("name");
-                memberInfo[2] = rs.getString("birthdate");
-                memberInfo[3] = rs.getString("address");
-                if (rs.getString("sex").equals("1")) {
-                    sex = "女";
-                }
-                memberInfo[4] = sex;
-                memberInfo[5] = rs.getString("mail_address");
-                memberInfo[6] = rs.getString("phone");
+            	no = rs.getString("no");
+                name = rs.getString("name");
+                birthdate = rs.getString("birthdate");
+                address = rs.getString("address");
+                sex = rs.getString("sex");
+                mail_address = rs.getString("mail_address");
+                phone = rs.getString("phone");
             }
 
         } catch (Exception e) {
@@ -79,7 +77,14 @@ public class MypageChangeServlet extends HttpServlet {
             }
         }
 
-        request.setAttribute("memberInfo", memberInfo);
+        request.setAttribute("no", no);
+        request.setAttribute("name", name);
+        request.setAttribute("birthdate", birthdate);
+        request.setAttribute("address", address);
+        request.setAttribute("sex", sex);
+        request.setAttribute("nmail_address", mail_address);
+        request.setAttribute("phone", phone);
+
         RequestDispatcher rd = request.getRequestDispatcher("LoginJson.jsp");
         rd.forward(request, response);
     }
