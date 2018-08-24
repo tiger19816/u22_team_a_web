@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class Dao {
     private final String DB_HOST = "localhost";
-    private final String DB_NAME = "U22";
+    private final String DB_NAME = "u22";
     private final String DB_USER = "root";
     private final String DB_PASS = "";
 
