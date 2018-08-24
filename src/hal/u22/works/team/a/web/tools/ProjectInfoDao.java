@@ -14,6 +14,8 @@ public class ProjectInfoDao extends Dao{
 
 		String sql = "";
 		String result = "";
+		//画像URLをとりあえず直打ち
+		String imageUrl = "http://192.168.42.27:8080/u22_team_a_web/temp/";
 
 		sql  = "SELECT no, post_date, (post_money + COALESCE(SUM(assists.assist_money),0)) AS 'donation_money', place, content, photo ";
 		sql += "FROM posts ";
