@@ -3,6 +3,7 @@ package hal.u22.works.team.a.web.tools;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import hal.u22.works.team.a.achievement.list.screen.AchievementListScreenInfo;
 import hal.u22.works.team.a.web.entities.Posts;
 import hal.u22.works.team.a.web.newProject.NewProjectPostsConfirmationScreenActivityInfo;
 
@@ -101,6 +102,182 @@ public class DataAccess extends Dao {
 		catch(Exception e) {
 			e.printStackTrace();
             throw e;
+		}
+	}
+	
+	/**
+	 * Postsテーブルの cleaning_flag を もとに  no, title, place, post_date の適切な全行を取得するクラス
+	 * 
+	 * @param flagNum
+	 * @return
+	 */
+	
+	public ArrayList<AchievementListScreenInfo> getPostsAllTable(String flagNum , int num){
+		//取得した値の格納先
+		ArrayList<AchievementListScreenInfo> table = new ArrayList<AchievementListScreenInfo>();
+		//SQL文の作成
+		String sql = "select no, title, place, post_date from posts where cleaning_flag = "+flagNum+"\n" + 
+				"ORDER BY post_date ASC LIMIT "+num+" , 10 " ;
+		System.out.println(sql);
+		//SQLの発行
+		try {
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				AchievementListScreenInfo list = new AchievementListScreenInfo();
+				list.setNo(rs.getString("no"));
+				list.setTitle(rs.getString("title"));
+				list.setPlace(rs.getString("place"));
+				list.setPostDate(rs.getString("post_date"));
+				table.add(list);
+			}
+			System.out.println("終わり");
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("エラー");
+			System.out.println(e);
+		}
+		return  table;
+	}
+	
+	/**
+	 * Postsテーブルの cleaning_flag、 no を もとに  no, title, place, post_date, content, photo, 
+	 * と assistの中の寄付金合計と Postsテーブルの初期投資金額を合計した値 (posts.post_money + assists.add_money) as money  
+	 * の行を取得するクラス
+	 * 
+	 * @param no
+	 * @param flagNum
+	 * @return
+	 */
+	public AchievementListScreenInfo getPostsTable(String no,String flagNum){
+		//取得した値の格納先
+		AchievementListScreenInfo list = new AchievementListScreenInfo();
+		//SQL文の作成
+		String sql = "select posts.no, posts.title, posts.place, posts.post_date, posts.content, posts.photo, (posts.post_money + assists.add_money) as money, target_money from posts "
+				+ "inner join (SELECT post_no, sum(assist_money) as add_money from assists GROUP by post_no) as assists "
+				+ "on assists.post_no = posts.no "
+				+ "where cleaning_flag = " + flagNum + " and posts.no =" + no +" order by post_date ASC" ;
+		System.out.println(sql);
+		//SQLの発行
+		try {
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				list.setNo(rs.getString("posts.no"));
+				list.setTitle(rs.getString("posts.title"));
+				list.setPlace(rs.getString("posts.place"));
+				list.setPostDate(rs.getString("posts.post_date"));
+				list.setContent(rs.getString("posts.content"));
+				list.setPhoto(rs.getString("posts.photo"));
+				list.setPostMoney(rs.getString("money"));
+				list.setTargetMoney(rs.getString("target_money"));
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("エラー");
+			System.out.println(e);
+
+		}
+		return  list;
+	}
+	
+	
+	/**
+	 * Postsテーブルの no に適応する行 のカラム（ cleaning_flag） を  flagNum へ更新するクラス
+	 * 
+	 * @param no
+	 * @param flagNum
+	 */
+	
+	public void UpdateCleuningFlag(String no, String flagNum) {
+		//SQL文の作成
+		String sql = "update posts set cleaning_flag = " + flagNum + " where no = " + no; 
+		System.out.println(sql);
+		//SQLの発行
+		try {
+			st.executeUpdate(sql);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	/**
+	 * Postsテーブルの no に適応する行 のcleaning_flag  を  flagNum, target_money を money へ更新するクラス
+	 * 
+	 * @param no
+	 * @param flagNum
+	 * @param money
+	 */
+	
+	public void UpdateCleuningFlag(String no, String flagNum, String money) {
+		//SQL文の作成
+		String sql = "update posts set cleaning_flag = " + flagNum + ", target_money = " + money + " where no = " + no; 
+		System.out.println(sql);
+		//SQLの発行
+		try {
+			st.executeUpdate(sql);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	/**
+	 * 管理者ID、パスワードを使いログインできるかを確認する。
+	 * 
+	 * @param id
+	 * @param pass
+	 * @return
+	 */
+	public boolean CheckAdminAccess(String id, String pass) {
+		//SQL文作成
+		String sql = "Select * from administrators where id = '" + id + "' and password = '" + pass + "'";
+		System.out.println(sql);
+		try {
+			rs = st.executeQuery(sql);
+			rs.last();
+			int count = rs.getRow();
+			rs.beforeFirst();
+			
+			if(count == 0) {
+				return false;
+			}
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public String GetAdminName(String id, String pass) {
+		//SQL文作成
+		String sql = "Select name from administrators where id = '" + id + "' and password = '" + pass + "'";
+		String name="";
+		System.out.println(sql);
+		try {
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				name = rs.getString("name");
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}		
+		return name;
+	}
+
+	//データベースのレコード数を抽出
+	public int Max(String flagNum) throws SQLException{
+		try {
+			String sql = "SELECT COUNT(*) FROM posts where cleaning_flag = " + flagNum + "";
+			rs = st.executeQuery(sql);
+			int max = 0; 
+			if(rs.next()) {
+				max = rs.getInt("COUNT(*)");
+			}
+			return max;
+		}catch(SQLException e) {
+			throw e;
 		}
 	}
 
