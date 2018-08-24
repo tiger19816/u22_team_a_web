@@ -1,6 +1,8 @@
 package hal.u22.works.team.a.web.tools;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ProjectInfoDao extends Dao{
 
@@ -12,39 +14,58 @@ public class ProjectInfoDao extends Dao{
 
 		String sql = "";
 		String result = "";
+		//画像URLをとりあえず直打ち
+		String imageUrl = "http://192.168.42.27:8080/u22_team_a_web/temp/";
 
-		sql  = "SELECT post_date, place, content ";
+		sql  = "SELECT no, (post_date + SUM(assists.assist_money)) AS 'donation_money', place, content ";
 		sql += "FROM posts ";
-		sql += "WHERE no = '" + no + "';";
+		sql += "INNER JOIN assists ON no = assists.posts_no ";
+		sql += "WHERE no = '" + no + "' ";
+		sql += "GROUP BY no ASC";
 
 		this.read(sql);
 		while(this.rs.next()){
-			result += "\"postDate\":'" + this.rs.getString("post_date") + "'\n";
+			result += "\"donationMoney\":'" + this.rs.getString("donation_money") + "'\n";
 			result += "\"place\":'" + this.rs.getString("place") + "'\n";
 			result += "\"content\":'" + this.rs.getString("content") + "'\n";
+			result += "\"photo\":'" + this.rs.getString("photo") + "'\n";
 		}
 		return result;
 	}
 
-	public void setDonation(String no, String donation)throws SQLException, ClassNotFoundException{
+	public void setDonation(String postNo, String memberNo, String donation)throws SQLException, ClassNotFoundException{
+
 		String sql = "";
-		int postMoney = 0;
+		String flg = "0";
+		int fastMoney = 5000;
 
-		sql  = "SELECT post_money ";
-		sql += "FROM posts ";
-		sql += "WHERE no = '" + no + "';";
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String toDay = sdf.format(calendar.getTime());
 
-		this.read(sql);
-		while(this.rs.next()){
-			postMoney = this.rs.getInt("post_money");
-		}
-		postMoney += Integer.parseInt(donation);
-
-		sql  = "UPDATE posts ";
-		sql += "SET post_money = '" + postMoney + "' ";
-		sql += "WHERE no = '" + no + "'";
+		sql  = "INSERT INTO assists(`member_no`, `post_no`, `assist_money`, `assist_date`) ";
+		sql += "VALUES('" + memberNo + "', '" + postNo + "', '" + donation + "', '" + toDay + "',)";
 
 		this.upgrade(sql);
+
+		sql  = "SELECT no, (post_date + SUM(assists.assist_money)) AS 'donation_money',  target_money, cleaning_flag ";
+		sql += "FROM posts ";
+		sql += "INNER JOIN assists ON no = assists.posts_no ";
+		sql += "WHERE no = '" + postNo + "' ";
+		sql += "GROUP BY no ASC";
+		this.read(sql);
+		if(this.rs.getInt("cleaning_flag") == 0 && this.rs.getInt("donation_money") >= fastMoney){
+			flg = "1";
+		}
+		if(this.rs.getInt("cleaning_flag") == 2 && this.rs.getInt("donation_money") >= this.rs.getInt("target_money")){
+			flg = "3";
+		}
+		if(flg != "0"){
+			sql  = "UPDATE posts ";
+			sql += "SET cleaning_flag = '" + flg + "' ";
+			sql += "WHERE no = '" + postNo + "'";
+			this.upgrade(sql);
+		}
 
 	}
 

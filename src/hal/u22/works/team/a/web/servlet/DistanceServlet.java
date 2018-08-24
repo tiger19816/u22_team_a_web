@@ -38,18 +38,13 @@ public class DistanceServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		//現在地の緯度・経度
-		//float lat = Float.parseFloat(request.getParameter(""));
-		//float lng = Float.parseFloat(request.getParameter(""));
-		float lat = (float) 1;
-		float lng = (float) 1;
+		double lat = Double.parseDouble(request.getParameter("lat"));
+		double lng = Double.parseDouble(request.getParameter("lng"));
+//		double lat = (double) 121;
+//		double lng = (double) 33;
 
 		response.setContentType("application/json; charset=UTF-8");
-		//PrintWriter out = response.getWriter();
 
-		//JSONを作成する
-	    //out.print("{");
-		//out.println("true");
-		//out.println("}");
 		try {
 			ArrayList<Map<String, String>> point = new ArrayList<Map<String, String>>();
 			Distance d = new Distance();
