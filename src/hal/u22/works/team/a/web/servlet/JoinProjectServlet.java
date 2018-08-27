@@ -34,11 +34,11 @@ public class JoinProjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//文字化け対策
+		request.setCharacterEncoding("utf-8");
 		//会員NO取得
-		String memberNo = "";
 		int judge = Integer.parseInt(request.getParameter("flag"));
-		System.out.println(memberNo);
-		memberNo = "3";
+		int memberNo = Integer.parseInt(request.getParameter("id"));
 		//投稿情報を格納する配列
 		ArrayList<Posts> posts = new ArrayList<Posts>();
 		//DBに接続
@@ -47,9 +47,9 @@ public class JoinProjectServlet extends HttpServlet {
 			da = new DataAccess();
 			//投稿情報抽出
 			if(judge == 1) {
-				posts = da.MyPostSelect(Integer.parseInt(memberNo));
+				posts = da.MyPostSelect(memberNo);
 			}else {
-				posts = da.MyAssistSelect(Integer.parseInt(memberNo));
+				posts = da.MyAssistSelect(memberNo);
 			}
 			da.close();
 		}
