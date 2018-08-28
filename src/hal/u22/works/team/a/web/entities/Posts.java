@@ -62,12 +62,16 @@ public class Posts {
 		if(flag == 0) {
 			this._status = "集金中（金額未設定）";
 		}else if(flag == 1) {
-			this._status = "集金中（金額設定完了）";
+			this._status = "集金中（金額設定必要）";
 		}else if(flag == 2) {
-			this._status = "依頼中";
+			this._status = "集金中（金額設定完了）";
 		}else if(flag == 3) {
-			this._status = "完了";
+			this._status = "集金完了（目標金額達成）";
 		}else if(flag == 4) {
+			this._status = "集金完了（依頼完了）";
+		}else if(flag == 5) {
+			this._status = "清掃完了";
+		}else if(flag == 6) {
 			this._status = "再検討";
 		}
 	}
