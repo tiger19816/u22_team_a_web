@@ -39,7 +39,7 @@
 <table>
 
 	<tr><th>ID</th><td><input type="text" class="form-control"  name ="id" value="<%= error.GetId()%>"></td></tr>
-	<tr><th>PassWord</th><td><input type="text" class="form-control" name="pass"></td></tr>
+	<tr><th>PassWord</th><td><input type="password" class="form-control" name="pass"></td></tr>
 	<tr><td colspan="2"><%=error.GetErrorLog() %></td></tr>
 	<tr><td colspan="2"><input type="submit" class="btn btn-primary" value="ログイン"></td></tr>
 	
