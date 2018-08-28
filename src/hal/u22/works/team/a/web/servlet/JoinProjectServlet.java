@@ -35,7 +35,8 @@ public class JoinProjectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//文字化け対策
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		//会員NO取得
 		int judge = Integer.parseInt(request.getParameter("flag"));
 		int memberNo = Integer.parseInt(request.getParameter("id"));
