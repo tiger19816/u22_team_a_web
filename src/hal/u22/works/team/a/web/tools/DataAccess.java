@@ -152,8 +152,8 @@ public class DataAccess extends Dao {
 		//取得した値の格納先
 		AchievementListScreenInfo list = new AchievementListScreenInfo();
 		//SQL文の作成
-		String sql = "select posts.no, posts.title, posts.place, posts.post_date, posts.content, posts.photo, (posts.post_money + assists.add_money) as money, target_money from posts "
-				+ "inner join (SELECT post_no, sum(assist_money) as add_money from assists GROUP by post_no) as assists "
+		String sql = "select posts.no, posts.title, posts.place, posts.post_date, posts.content, posts.photo, (posts.post_money + COALESCE(assists.add_money,0)) as money, target_money from posts "
+				+ "left join (SELECT post_no, sum(assist_money) as add_money from assists GROUP by post_no) as assists "
 				+ "on assists.post_no = posts.no "
 				+ "where cleaning_flag = " + flagNum + " and posts.no =" + no +" order by post_date ASC" ;
 		System.out.println(sql);
