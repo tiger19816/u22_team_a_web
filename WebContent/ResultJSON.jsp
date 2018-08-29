@@ -3,5 +3,5 @@
 	String result = (String)request.getAttribute("result");
 %>
 {
-	<%= result %>
+<%= result %>
 }

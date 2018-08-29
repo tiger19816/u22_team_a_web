@@ -14,14 +14,13 @@ public class ProjectInfoDao extends Dao{
 
 		String sql = "";
 		String result = "";
-		//画像URLをとりあえず直打ち
-		String imageUrl = "http://192.168.42.27:8080/u22_team_a_web/temp/";
 
 		sql  = "SELECT no, post_date, (post_money + COALESCE(SUM(assists.assist_money),0)) AS 'donation_money', place, content, photo ";
 		sql += "FROM posts ";
 		sql += "LEFT JOIN assists ON no = assists.post_no ";
 		sql += "WHERE no = '" + no + "' ";
 		sql += "GROUP BY no ASC";
+		System.out.println(sql);
 		this.read(sql);
 		while(this.rs.next()){
 			result += "\"donationMoney\":'" + this.rs.getString("donation_money") + "',\n";
@@ -30,6 +29,7 @@ public class ProjectInfoDao extends Dao{
 			result += "\"content\":'" + this.rs.getString("content") + "',\n";
 			result += "\"photo\":'" + this.rs.getString("photo") + "'";
 		}
+		System.out.println(result);
 		return result;
 	}
 //寄付金額をDBに登録するメソッド
