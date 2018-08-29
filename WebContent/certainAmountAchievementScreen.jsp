@@ -62,22 +62,22 @@
 		<ul class="pagination justify-content-center">
 		<%if(p.getBackF()){%>
 			<li class="page-item">
-				<a class="page-link" href="./Index?id=<%=p.getNextPage()-1 %>" aria-label="前">
+				<a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getNextPage()-1 %>&flagNum=1" aria-label="前">
 		       		<span aria-hidden="true">&laquo;</span>
 		       		<span class="sr-only">前</span>
 		    		</a> 
 		    </li>
 		<%} %>
-			<%if(p.getMinF()){%><li class="page-item"><a class="page-link" href="./Index?id=1">1..</a></li><%} %>
-			<li <%=(p.getOneFlg())%>><a class="page-link" href="./Index?id=<%=p.getOne() %>"><%=p.getOne() %></a></li>
-			<%if(p.getPage() >= 2){%><li <%=(p.getTwoFlg())%>><a class="page-link" href="./Index?id=<%=p.getTwo() %>"><%=p.getTwo() %></a></li><%} %>
-			<%if(p.getPage() >= 3){%><li <%=(p.getThreeFlg())%>><a class="page-link" href="./Index?id=<%=p.getThree() %>"><%=p.getThree() %></a></li><%} %>
-			<%if(p.getPage() >= 4){%><li <%=(p.getFourFlg())%>><a class="page-link" href="./Index?id=<%=p.getFour() %>"><%=p.getFour() %></a></li><%} %>
-			<%if(p.getPage() >= 5){%><li <%=(p.getFiveFlg())%>><a class="page-link" href="./Index?id=<%=p.getFive() %>"><%=p.getFive() %></a></li><%} %>
-			<%if(p.getMaxF()){%><li class="page-item"><a class="page-link" href="./Index?id=<%=p.getPage() %>">..<%=p.getPage() %></a></li><%} %>
+			<%if(p.getMinF()){%><li class="page-item"><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=1&flagNum=1">1..</a></li><%} %>
+			<li <%=(p.getOneFlg())%>><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getOne() %>&flagNum=1"><%=p.getOne() %></a></li>
+			<%if(p.getPage() >= 2){%><li <%=(p.getTwoFlg())%>><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getTwo() %>&flagNum=1"><%=p.getTwo() %></a></li><%} %>
+			<%if(p.getPage() >= 3){%><li <%=(p.getThreeFlg())%>><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getThree() %>&flagNum=1"><%=p.getThree() %></a></li><%} %>
+			<%if(p.getPage() >= 4){%><li <%=(p.getFourFlg())%>><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getFour() %>&flagNum=1"><%=p.getFour() %></a></li><%} %>
+			<%if(p.getPage() >= 5){%><li <%=(p.getFiveFlg())%>><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getFive() %>&flagNum=1"><%=p.getFive() %></a></li><%} %>
+			<%if(p.getMaxF()){%><li class="page-item"><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getPage() %>&flagNum=1">..<%=p.getPage() %></a></li><%} %>
 			<%if(p.getNextF()){%>
 			<li class="page-item">
-		      <a class="page-link" href="./Index?id=<%=p.getNextPage()+1 %>" aria-label="次">
+		      <a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getNextPage()+1 %>&flagNum=1" aria-label="次">
 		        <span aria-hidden="true">&raquo;</span>
 		        <span class="sr-only">次</span>
 		      </a>
