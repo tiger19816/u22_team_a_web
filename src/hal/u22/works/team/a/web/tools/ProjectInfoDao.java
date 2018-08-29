@@ -17,7 +17,7 @@ public class ProjectInfoDao extends Dao{
 		//画像URLをとりあえず直打ち
 		String imageUrl = "http://192.168.42.27:8080/u22_team_a_web/temp/";
 
-		sql  = "SELECT no, post_date, (post_money + COALESCE(SUM(assists.assist_money),0)) AS 'donation_money', place, content, photo, cleaning_flag, target_money ";
+		sql  = "SELECT no, title, post_date, (post_money + COALESCE(SUM(assists.assist_money),0)) AS 'donation_money', place, content, photo, cleaning_flag, target_money ";
 		sql += "FROM posts ";
 		sql += "LEFT JOIN assists ON no = assists.post_no ";
 		sql += "WHERE no = '" + no + "' ";
@@ -26,6 +26,7 @@ public class ProjectInfoDao extends Dao{
 		while(this.rs.next()){
 			System.out.println(rs.getString("cleaning_flag"));
 			System.out.println(this.rs.getString("target_money" ));
+			result += "\"title\":'" + this.rs.getString("title") + "',\n";
 			result += "\"donationMoney\":'" + this.rs.getString("donation_money") + "',\n";
 			result += "\"postDate\":'" + this.rs.getString("post_date") + "',\n";
 			result += "\"place\":'" + this.rs.getString("place") + "',\n";
