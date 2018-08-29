@@ -8,6 +8,7 @@ ArrayList<Posts> postsList = (ArrayList<Posts>)request.getAttribute("LIST");
 	"postsList":[
 		<% for(int i=0; i<postsList.size(); i++){ %>
 		{
+			"postNo":"<%= postsList.get(i).getNo() %>",
 			"postTitle":"<%= postsList.get(i).getTitle() %>",
 			"postPhoto":"<%= postsList.get(i).getPhoto() %>",
 			"postMoney":"<%= postsList.get(i).getMoney() %>",

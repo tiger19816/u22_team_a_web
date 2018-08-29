@@ -17,18 +17,22 @@ public class ProjectInfoDao extends Dao{
 		//画像URLをとりあえず直打ち
 		String imageUrl = "http://192.168.42.27:8080/u22_team_a_web/temp/";
 
-		sql  = "SELECT no, post_date, (post_money + COALESCE(SUM(assists.assist_money),0)) AS 'donation_money', place, content, photo ";
+		sql  = "SELECT no, post_date, (post_money + COALESCE(SUM(assists.assist_money),0)) AS 'donation_money', place, content, photo, cleaning_flag, target_money ";
 		sql += "FROM posts ";
 		sql += "LEFT JOIN assists ON no = assists.post_no ";
 		sql += "WHERE no = '" + no + "' ";
 		sql += "GROUP BY no ASC";
 		this.read(sql);
 		while(this.rs.next()){
+			System.out.println(rs.getString("cleaning_flag"));
+			System.out.println(this.rs.getString("target_money" ));
 			result += "\"donationMoney\":'" + this.rs.getString("donation_money") + "',\n";
 			result += "\"postDate\":'" + this.rs.getString("post_date") + "',\n";
 			result += "\"place\":'" + this.rs.getString("place") + "',\n";
 			result += "\"content\":'" + this.rs.getString("content") + "',\n";
-			result += "\"photo\":'" + this.rs.getString("photo") + "'";
+			result += "\"photo\":'" + this.rs.getString("photo") + "',\n";
+			result += "\"cleanFlag\":'"+ this.rs.getString("cleaning_flag") + "',\n";
+			result += "\"targetMoney\":'" + this.rs.getString("target_money" ) + "'";
 		}
 		return result;
 	}
