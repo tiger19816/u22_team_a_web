@@ -106,7 +106,7 @@ public class ContactServlet extends HttpServlet {
         //JSPファイルにDB登録成功の結果を渡す
         //****************************************:
 
-        request.setAttribute("result", dbSuccess);
+        request.setAttribute("result", String.valueOf(dbSuccess));
 
         RequestDispatcher rd = request.getRequestDispatcher("ContactJson.jsp");
         rd.forward(request, response);
