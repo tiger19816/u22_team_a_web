@@ -40,6 +40,7 @@ public class JoinProjectServlet extends HttpServlet {
 		//会員NO取得
 		int judge = Integer.parseInt(request.getParameter("flag"));
 		int memberNo = Integer.parseInt(request.getParameter("id"));
+		String strJsp = "myposts_list_json.jsp";
 		//投稿情報を格納する配列
 		ArrayList<Posts> posts = new ArrayList<Posts>();
 		//DBに接続
@@ -51,6 +52,7 @@ public class JoinProjectServlet extends HttpServlet {
 				posts = da.MyPostSelect(memberNo);
 			}else {
 				posts = da.MyAssistSelect(memberNo);
+				strJsp = "myassists_list_json.jsp";
 			}
 			da.close();
 		}
@@ -64,7 +66,7 @@ public class JoinProjectServlet extends HttpServlet {
 		}
 
 		request.setAttribute("LIST", posts);
-		RequestDispatcher rd = request.getRequestDispatcher("myposts_list_json.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(strJsp);
 		rd.forward(request, response);
 	}
 
