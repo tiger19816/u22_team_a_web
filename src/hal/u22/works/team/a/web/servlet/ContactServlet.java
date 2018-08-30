@@ -41,11 +41,13 @@ public class ContactServlet extends HttpServlet {
         System.out.println("サーバー");
 
         //仮の値*******************************************
-        int member_no = 123456;
+        int member_no = 0;
         //String content = "内容";
         //String date = "2018-08-24"; //今の日付
         //****************************************************
 
+        String memberNoStr = (String) request.getParameter("id");
+        member_no = Integer.parseInt(memberNoStr);
         String content = (String) request.getParameter("content");
 
         System.out.println(content);
@@ -104,7 +106,7 @@ public class ContactServlet extends HttpServlet {
         //JSPファイルにDB登録成功の結果を渡す
         //****************************************:
 
-        request.setAttribute("result", "true");
+        request.setAttribute("result", dbSuccess);
 
         RequestDispatcher rd = request.getRequestDispatcher("ContactJson.jsp");
         rd.forward(request, response);
