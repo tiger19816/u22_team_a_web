@@ -34,7 +34,7 @@ public class Contact {
      * @return
      */
     public int getMember_no() {
-        return member_no;
+        return this.member_no;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Contact {
      * @return
      */
     public String getContent() {
-        return content;
+        return this.content;
     }
 
     /**
@@ -66,7 +66,7 @@ public class Contact {
      * @return
      */
     public String getDate() {
-        return date;
+        return this.date;
     }
 
     /**

@@ -41,7 +41,7 @@ public class ContactServlet extends HttpServlet {
         System.out.println("サーバー");
 
         //仮の値*******************************************
-        int member_no = 12345;
+        int member_no = 123456;
         //String content = "内容";
         //String date = "2018-08-24"; //今の日付
         //****************************************************
@@ -106,7 +106,7 @@ public class ContactServlet extends HttpServlet {
 
         request.setAttribute("result", "true");
 
-        RequestDispatcher rd = request.getRequestDispatcher("loginJson.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("ContactJson.jsp");
         rd.forward(request, response);
 
 	}
