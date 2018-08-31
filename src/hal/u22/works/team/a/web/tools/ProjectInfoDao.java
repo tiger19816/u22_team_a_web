@@ -33,6 +33,9 @@ public class ProjectInfoDao extends Dao{
 			result += "\"cleanFlag\":'"+ this.rs.getString("cleaning_flag") + "',\n";
 			result += "\"targetMoney\":'" + this.rs.getString("target_money" ) + "'";
 		}
+
+
+
 		return result;
 	}
 //清掃が完了している場合に、その画像を表示する為のメソッド
@@ -42,7 +45,7 @@ public class ProjectInfoDao extends Dao{
 
 		sql  = "SELECT posts.no, COALESCE(cleanings.photo,0) AS photo, COALESCE(cleanings.complete_flag,0) AS flag ";
 		sql += "FROM posts ";
-		sql += "LEFT JOIN cleanings ON posts.no = cleanings.post_no ";
+		sql += "LEFT JOIN cleanings ON posts.no = cleanings.project_no ";
 		sql += "WHERE posts.no = '" + no + "' ";
 		sql += "limit 1";
 
