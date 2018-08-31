@@ -40,7 +40,7 @@ public class MypageChangeCompleteServlet extends HttpServlet {
 		String sex = request.getParameter("sex");
 		String mail = request.getParameter("mail");
 		String phone = request.getParameter("phone");
-		//String no = request.getParameter("no");
+		String no = request.getParameter("no");
 
  		String sql = "UPDATE members SET ";
 		sql += "name = '" + name + "', ";
@@ -48,7 +48,7 @@ public class MypageChangeCompleteServlet extends HttpServlet {
 		sql += "sex = '" + sex + "', ";
 		sql += "mail_address = '" + mail + "', ";
 		sql += "phone = '" + phone + "' ;";
-		//sql += "WHERE no = 3;";
+		sql += "WHERE no = " + Integer.parseInt(no) +";";
 
 		Dao dao = null;
 		try {
