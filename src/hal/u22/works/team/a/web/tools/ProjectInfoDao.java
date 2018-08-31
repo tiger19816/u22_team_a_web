@@ -149,7 +149,7 @@ public class ProjectInfoDao extends Dao{
 
 		String sql;
 
-		sql  = "INSERT INTO cleanings(supplier_no, post_no, photo, complete_flag) ";
+		sql  = "INSERT INTO cleanings(supplier_no, project_no, photo, complete_flag) ";
 		sql += "VALUES(" + supplierNo + ", " + postNo + ", '" + fileName + "', 1)";
 		System.out.println(sql);
 		upgrade(sql);
