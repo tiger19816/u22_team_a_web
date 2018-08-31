@@ -1,5 +1,7 @@
 package hal.u22.works.team.a.web.servlet;
 
+import hal.u22.works.team.a.web.tools.ProjectInfoDao;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -43,6 +45,7 @@ public class ProjectInfoServlet extends HttpServlet {
 		try {
 			dao = new ProjectInfoDao();
 			result = dao.getProjectInfo(no);
+			result = dao.getCleaningImage(result, no);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
