@@ -86,7 +86,7 @@
 		</ul>
 	</nav>
 		<div id ="backpage">
-			<a href="javascript:history.back()">戻る</a>
+			<a href="./AdministratorTopServlet">戻る</a>
 		</div>
 </div>
 </body>

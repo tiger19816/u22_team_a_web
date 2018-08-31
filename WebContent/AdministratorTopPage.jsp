@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <%
-	
+
 	String name = (String)request.getAttribute("userName");
 
 %>
@@ -37,12 +37,13 @@
 	<div id ="userName">
 		<p><%=name %></p>
 	</div>
-	
+
 	<div id="logout">
 		<a href ="./AdministratorLogOutServlet">ログアウト</a>
 	</div>
 	<a href="./CertainAmountAchievementListScreenServlet?flagNum=1">一定額達成リスト</a>
 	<a href="./CertainAmountAchievementListScreenServlet?flagNum=3">目標額達成リスト</a>
+	<a href="./AdminstratorInquiryServlet?flagNum=1">お問い合わせ</a>
 </div>
 </body>
 </html>
