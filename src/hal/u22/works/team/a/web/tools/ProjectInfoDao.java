@@ -43,7 +43,7 @@ public class ProjectInfoDao extends Dao{
 
 		String sql = "";
 		String flg = "0";
-		int fastMoney = 5000;
+		int fastMoney = 3000;
 
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
