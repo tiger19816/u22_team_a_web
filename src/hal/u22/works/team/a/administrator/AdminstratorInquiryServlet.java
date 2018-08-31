@@ -54,7 +54,7 @@ public class AdminstratorInquiryServlet extends HttpServlet {
 		try {
 			//DAOのコンストラクタ呼び出し
 			DataAccess da = new DataAccess();
-			max = da.Max(flagNum);
+			max = da.Max();
 			p.setPageNum(max);
 			String page = (String)request.getParameter("id");
 			if(page == null) {
@@ -62,7 +62,7 @@ public class AdminstratorInquiryServlet extends HttpServlet {
 			}
 			p.setNowPage(page);
 			//array*クラスの値を格納
-			arrayInquiry = da.getInquiryAllTable(flagNum,p.getFirstRecode());
+			arrayInquiry = da.getInquiryAllTable(p.getFirstRecode());
 
 			if("1".equals(flagNum)) {
 				strJspName ="AdminstratorInquiry.jsp" ;
@@ -71,9 +71,7 @@ public class AdminstratorInquiryServlet extends HttpServlet {
 				AdminstratorInquiryInfo inquiry = new AdminstratorInquiryInfo();
 				String no = request.getParameter("no");
 				inquiry = da.getInquiryTable(no);
-//				strJspName = "AdminstratorInquiryDetails.jsp";
 				request.setAttribute("inquiry", inquiry);
-				RequestDispatcher rd = request.getRequestDispatcher(strJspName);
 			}
 		} catch (Exception e) {
 

@@ -292,9 +292,9 @@ public class DataAccess extends Dao {
 
 
 	//データベースのレコード数を抽出
-	public int max(String flagNum) throws SQLException{
+	public int Max() throws SQLException{
 		try {
-			String sql = "SELECT COUNT(*) FROM contact where cleaning_flag = " + flagNum + "";
+			String sql = "SELECT COUNT(*) FROM contact";
 			rs = st.executeQuery(sql);
 			int max = 0;
 			if(rs.next()) {
@@ -306,7 +306,7 @@ public class DataAccess extends Dao {
 		}
 	}
 
-	public ArrayList<AdminstratorInquiryInfo> getInquiryAllTable(String flagNum , int num){
+	public ArrayList<AdminstratorInquiryInfo> getInquiryAllTable(int num){
 		//取得した値の格納先
 		ArrayList<AdminstratorInquiryInfo> table = new ArrayList<AdminstratorInquiryInfo>();
 		//SQL文の作成
