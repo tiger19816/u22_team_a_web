@@ -14,8 +14,6 @@ public class ProjectInfoDao extends Dao{
 
 		String sql = "";
 		String result = "";
-		//画像URLをとりあえず直打ち
-		String imageUrl = "http://192.168.42.27:8080/u22_team_a_web/temp/";
 
 		sql  = "SELECT no, title, post_date, (post_money + COALESCE(SUM(assists.assist_money),0)) AS 'donation_money', place, content, photo, cleaning_flag, target_money ";
 		sql += "FROM posts ";
@@ -24,8 +22,6 @@ public class ProjectInfoDao extends Dao{
 		sql += "GROUP BY no ASC";
 		this.read(sql);
 		while(this.rs.next()){
-			System.out.println(rs.getString("cleaning_flag"));
-			System.out.println(this.rs.getString("target_money" ));
 			result += "\"title\":'" + this.rs.getString("title") + "',\n";
 			result += "\"donationMoney\":'" + this.rs.getString("donation_money") + "',\n";
 			result += "\"postDate\":'" + this.rs.getString("post_date") + "',\n";
@@ -34,6 +30,36 @@ public class ProjectInfoDao extends Dao{
 			result += "\"photo\":'" + this.rs.getString("photo") + "',\n";
 			result += "\"cleanFlag\":'"+ this.rs.getString("cleaning_flag") + "',\n";
 			result += "\"targetMoney\":'" + this.rs.getString("target_money" ) + "'";
+		}
+		return result;
+	}
+//清掃が完了している場合に、その画像を表示する為のメソッド
+	public String getCleaningImage(String result, String no)throws SQLException, ClassNotFoundException{
+
+		String sql = "";
+
+		sql  = "SELECT posts.no, projects.no, COALESCE(cleanings.photo,0) AS photo, COALESCE(cleanings.complete_flag,0) AS flag ";
+		sql += "FROM posts ";
+		sql += "LEFT JOIN projects ON posts.no = projects.post_no ";
+		sql += "LEFT JOIN cleanings ON projects.no = cleanings.project_no ";
+		sql += "WHERE posts.no = '" + no + "' ";
+		sql += "limit 1";
+
+		System.out.println(sql);
+
+		this.read(sql);
+		while(this.rs.next()){
+			if(!this.rs.getString("flag").equals(null)){
+				result += ",\n\"completeFlag\":'" + this.rs.getString("flag") + "',\n";
+				if(this.rs.getString("flag").equals("1")){
+					result += "\"cleaningPhoto\":'" + this.rs.getString("photo") + "'";
+				}else{
+					result += "\"cleaningPhoto\": ''";
+				}
+			}else{
+				result += ",\"completeFlag\": ''";
+				result += ",\"cleaningPhoto\": ''";
+			}
 		}
 		return result;
 	}
