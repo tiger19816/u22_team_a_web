@@ -50,7 +50,7 @@ public class ProjectInfoDao extends Dao{
 
 		this.read(sql);
 		while(this.rs.next()){
-			if(!this.rs.getString("flag").equals(null)){
+			if(!this.rs.getString("flag").equals("0")){
 				result += ",\n\"completeFlag\":'" + this.rs.getString("flag") + "',\n";
 				if(this.rs.getString("flag").equals("1")){
 					result += "\"cleaningPhoto\":'" + this.rs.getString("photo") + "'";
