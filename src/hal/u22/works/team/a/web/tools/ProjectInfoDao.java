@@ -40,10 +40,9 @@ public class ProjectInfoDao extends Dao{
 
 		String sql = "";
 
-		sql  = "SELECT posts.no, projects.no, COALESCE(cleanings.photo,0) AS photo, COALESCE(cleanings.complete_flag,0) AS flag ";
+		sql  = "SELECT posts.no, COALESCE(cleanings.photo,0) AS photo, COALESCE(cleanings.complete_flag,0) AS flag ";
 		sql += "FROM posts ";
-		sql += "LEFT JOIN projects ON posts.no = projects.post_no ";
-		sql += "LEFT JOIN cleanings ON projects.no = cleanings.project_no ";
+		sql += "LEFT JOIN cleanings ON posts.no = cleanings.post_no ";
 		sql += "WHERE posts.no = '" + no + "' ";
 		sql += "limit 1";
 
@@ -129,16 +128,16 @@ public class ProjectInfoDao extends Dao{
 		List<String[]> projectList = new ArrayList<String[]>();
 
 		String projectSQL = "";
-		projectSQL  = "SELECT projects.no, posts.title ";
-		projectSQL += "FROM projects ";
-		projectSQL += "INNER JOIN posts ON post_no = posts.no";
+		projectSQL  = "SELECT no, title ";
+		projectSQL += "FROM posts ";
+		projectSQL += "WHERE cleaning_flag = '4'";
 
 		this.read(projectSQL);
 
 		while(this.rs.next()){
 			String[] project = new String[2];
-			project[0] = this.rs.getString("projects.no");
-			project[1] = this.rs.getString("posts.title");
+			project[0] = this.rs.getString("no");
+			project[1] = this.rs.getString("title");
 			System.out.println(project[0]+ ":" +project[1]);
 			projectList.add(project);
 		}
@@ -146,14 +145,22 @@ public class ProjectInfoDao extends Dao{
 		return projectList;
 	}
 	//更新メソッド
-	public void updateData(String supplierNo, String projectNo, String fileName)throws SQLException, ClassNotFoundException{
+	public void updateData(String supplierNo, String postNo, String fileName)throws SQLException, ClassNotFoundException{
 
 		String sql;
 
-		sql  = "INSERT INTO cleanings(supplier_no, project_no, photo, complete_flag) ";
-		sql += "VALUES(" + supplierNo + ", " + projectNo + ", '" + fileName + "', 1)";
-
+		sql  = "INSERT INTO cleanings(supplier_no, post_no, photo, complete_flag) ";
+		sql += "VALUES(" + supplierNo + ", " + postNo + ", '" + fileName + "', 1)";
 		System.out.println(sql);
 		upgrade(sql);
+
+		rs.next();
+
+		sql  = "UPDATE posts SET cleaning_flag = '5'";
+		sql += "WHERE no = '" + postNo + "'";
+		upgrade(sql);
+
+
+
 	}
 }
