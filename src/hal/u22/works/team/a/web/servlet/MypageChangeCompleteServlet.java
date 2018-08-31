@@ -47,8 +47,8 @@ public class MypageChangeCompleteServlet extends HttpServlet {
 		sql += "address = '" + address + "', ";
 		sql += "sex = '" + sex + "', ";
 		sql += "mail_address = '" + mail + "', ";
-		sql += "phone = '" + phone + "' ;";
-		sql += "WHERE no = " + Integer.parseInt(no) +";";
+		sql += "phone = '" + phone + "'";
+		sql += " WHERE no = " + Integer.parseInt(no) +";";
 
 		Dao dao = null;
 		try {
