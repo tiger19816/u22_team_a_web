@@ -32,6 +32,6 @@
 </style>
 </head>
 <body>
-	<p><img alt="画像" src="./temp/<%= name %>"></p>
+	<p><img alt="画像" src="./<%= name %>"></p>
 </body>
 </html>
