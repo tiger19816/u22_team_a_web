@@ -8,13 +8,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title><style>
+.row-eq-height {
+	display: -webkit-flex; /* Safari */
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.null {
+	height: 40px;
+}
+</style>
+<!--Bootstrap４に必要なCSSとJavaScriptを読み込み-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container">
+<div class="row">
 <%if(result != null){ %>
-	投稿が完了しました
+	<p class="form-control">投稿が完了しました</p>
 <%}else{ %>
-	投稿に失敗しました
+	<p class="form-control">投稿に失敗しました</p>
 <%} %>
+</div>
+</div>
 </body>
 </html>
