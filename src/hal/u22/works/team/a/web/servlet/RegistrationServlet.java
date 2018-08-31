@@ -110,12 +110,6 @@ public class RegistrationServlet extends HttpServlet {
 				while(rs.next()) {
 					userId = rs.getInt("no");
 				}
-
-				request.setAttribute("userId", userId);
-				request.setAttribute("result", "true");
-			}else{
-				System.out.println("既に登録されてました");
-				request.setAttribute("result", "false");
 			}
 
 		} catch (Exception e) {
@@ -126,6 +120,12 @@ public class RegistrationServlet extends HttpServlet {
 				} catch (Exception e) {
 			}
 		}
+		}
+		request.setAttribute("userId", userId);
+		if(count == 0) {
+			request.setAttribute("result", true);
+		}else {
+			request.setAttribute("result", false);
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("RegistrationJson.jsp");
 		rd.forward(request, response);
