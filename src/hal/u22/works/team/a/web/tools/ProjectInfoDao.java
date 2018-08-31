@@ -154,8 +154,6 @@ public class ProjectInfoDao extends Dao{
 		System.out.println(sql);
 		upgrade(sql);
 
-		rs.next();
-
 		sql  = "UPDATE posts SET cleaning_flag = '5'";
 		sql += "WHERE no = '" + postNo + "'";
 		upgrade(sql);
