@@ -14,7 +14,7 @@ public class Sql extends Dao {
 	 */
 	public void insertContentNew(Contact c)throws SQLException{
 		try {
-		    String sql = "INSERT INTO contact(member_no,content,send_date)VALUES("+c.getMember_no()+",'"+c.getContent()+"','"+c.getDate()+"');";
+		    String sql = "INSERT INTO contact (member_no,content,send_date) VALUES ("+c.getMember_no()+",'"+c.getContent()+"','"+c.getDate()+"');";
 			st.executeUpdate(sql);
 
 		} catch (SQLException e) {

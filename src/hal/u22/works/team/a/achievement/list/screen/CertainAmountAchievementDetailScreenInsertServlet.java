@@ -44,14 +44,20 @@ public class CertainAmountAchievementDetailScreenInsertServlet extends HttpServl
     	
 		//--------------処理--------------------------
 		try {
-			
+			strJspName ="./CertainAmountAchievementListScreenServlet";
 			//DAOのコンストラクト呼び出し
 			DataAccess da = new DataAccess();
 			//ラスの値を格納
 			if("1".equals(flagNum)) {
 				flagNum = "2";
 				money = request.getParameter("money");
-				da.UpdateCleuningFlag(no ,flagNum, money);
+				String allMone = request.getParameter("allMoney");
+				if(Integer.parseInt(money) <= Integer.parseInt(allMone) ) {
+					flagNum = "4";
+					da.UpdateCleuningFlag(no, flagNum);
+				}else {
+					da.UpdateCleuningFlag(no ,flagNum, money);
+				}
 				request.setAttribute("flagNum", "1");
 			}else {
 				flagNum = "4";

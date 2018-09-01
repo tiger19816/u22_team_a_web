@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-	String result = (String)request.getAttribute("imgPath");
-	System.out.println(result);
+    pageEncoding="UTF-8"
+   import = "hal.u22.works.team.a.administrator.AdminstratorInquiryInfo"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	AdminstratorInquiryInfo inquiry =(AdminstratorInquiryInfo)request.getAttribute("inquiry");
+
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title><style>
+<title>Insert title here</title>
+<style>
 .row-eq-height {
 	display: -webkit-flex; /* Safari */
 	display: flex;
@@ -32,12 +35,17 @@
 </head>
 <body>
 <div class="container">
-<div class="row">
-<%if(result != null){ %>
-	<p class="form-control">投稿が完了しました</p>
-<%}else{ %>
-	<p class="form-control">投稿に失敗しました</p>
-<%} %>
+	<table class="table table-striped">
+		<tr><th>日付</th><td><%=inquiry.getSendDate() %></td></tr>
+		<tr><th>会員番号</th><td><%=inquiry.getMemberNo() %></td></tr>
+		<tr><th>会員名</th><td><%=inquiry.getMemberName() %></td></tr>
+		<tr><th>メールアドレス</th><td><%=inquiry.getMailAddress() %></td></tr>
+		<tr><th>内容</th><td></td></tr>
+		<tr><td><%=inquiry.getContent() %></td></tr>
+
+	</table>
+<div id ="backpage">
+	<a href="javascript:history.back()">戻る</a>
 </div>
 </div>
 </body>

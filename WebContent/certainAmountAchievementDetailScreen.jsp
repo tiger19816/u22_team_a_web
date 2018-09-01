@@ -45,6 +45,7 @@
 		<tr><th>集計金額</th><td><%=achivement.getPostMoney() %></td></tr>
 		<tr><th>目標金額の設定</th><td><input type="text" class="form-control" name="money"></td></tr>
 	</table>
+	<input type="hidden" name="allMoney" value="<%= achivement.getPostMoney() %>">
 	<input type="hidden" name="flagNum" value="1" >
 	<input type="hidden" name="no" value="<%= achivement.getNo() %>">
 	<div id ="backpage">

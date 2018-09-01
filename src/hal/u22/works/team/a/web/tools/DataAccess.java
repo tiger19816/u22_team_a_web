@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import hal.u22.works.team.a.achievement.list.screen.AchievementListScreenInfo;
+import hal.u22.works.team.a.administrator.AdminstratorInquiryInfo;
 import hal.u22.works.team.a.web.entities.Posts;
 import hal.u22.works.team.a.web.newProject.NewProjectPostsConfirmationScreenActivityInfo;
 
@@ -21,21 +22,25 @@ public class DataAccess extends Dao {
 		super();
 	}
 
-	public void InsertPosts(NewProjectPostsConfirmationScreenActivityInfo info) throws Exception, SQLException{
+	public void InsertPosts(NewProjectPostsConfirmationScreenActivityInfo info, int Money) throws Exception, SQLException{
 		String sql = "insert into posts(member_no, category_no,post_date, post_money, place, latitude, longitude, title, content, photo, target_money, cleaning_flag) values("
-				+ " '" + info.getMemberNo() +"',"	//メンバーID			o
-				+ " '" + info.getCategoryNo() +"'," //カテゴリーNO			o
-				+ " cast( now() as date),"			//プロジェクト日			o
-				+ " '" + info.getPostMoney() +"',"  //プロジェクト初期投資	o
-				+ " '" + info.getPlace() +"',"		//場所				o
-				+ " '" + info.getLatitude() +"',"	//緯度				o
-				+ " '" + info.getLongitude() +"',"	//経度				o
-				+ " '" + info.getTitle() +"',"		//タイトル				o
-				+ " '" + info.getContent() +"',"	//内容				o
-				+ " '" + info.getPhoto() +"',"		//写真名				o
-				+ " 0,"								//収益				o
-				+ " 0"								//クリーン確認 初期値０	o
-				+ ")";
+				+ " '" + info.getMemberNo() +"',"	//メンバーID
+				+ " '" + info.getCategoryNo() +"'," //カテゴリーNO
+				+ " cast( now() as date),"			//プロジェクト日
+				+ " '" + info.getPostMoney() +"',"  //プロジェクト初期投資
+				+ " '" + info.getPlace() +"',"		//場所
+				+ " '" + info.getLatitude() +"',"	//緯度
+				+ " '" + info.getLongitude() +"',"	//経度
+				+ " '" + info.getTitle() +"',"		//タイトル
+				+ " '" + info.getContent() +"',"	//内容
+				+ " '" + info.getPhoto() +"',"		//写真名
+				+ " 0,";							//収益
+		if(Integer.parseInt(info.getPostMoney()) < Money) {			//初期投資金額が初期目標金額より多かった場合
+				sql +=" 0";							//クリーン確認
+		}else {
+				sql +=" 1";
+		}
+				sql += ")";
 
 		try {
 			if(!info.getTitle().equals("")) {
@@ -104,19 +109,19 @@ public class DataAccess extends Dao {
             throw e;
 		}
 	}
-	
+
 	/**
 	 * Postsテーブルの cleaning_flag を もとに  no, title, place, post_date の適切な全行を取得するクラス
-	 * 
+	 *
 	 * @param flagNum
 	 * @return
 	 */
-	
+
 	public ArrayList<AchievementListScreenInfo> getPostsAllTable(String flagNum , int num){
 		//取得した値の格納先
 		ArrayList<AchievementListScreenInfo> table = new ArrayList<AchievementListScreenInfo>();
 		//SQL文の作成
-		String sql = "select no, title, place, post_date from posts where cleaning_flag = "+flagNum+"\n" + 
+		String sql = "select no, title, place, post_date from posts where cleaning_flag = "+flagNum+"\n" +
 				"ORDER BY post_date ASC LIMIT "+num+" , 10 " ;
 		System.out.println(sql);
 		//SQLの発行
@@ -138,12 +143,12 @@ public class DataAccess extends Dao {
 		}
 		return  table;
 	}
-	
+
 	/**
-	 * Postsテーブルの cleaning_flag、 no を もとに  no, title, place, post_date, content, photo, 
-	 * と assistの中の寄付金合計と Postsテーブルの初期投資金額を合計した値 (posts.post_money + assists.add_money) as money  
+	 * Postsテーブルの cleaning_flag、 no を もとに  no, title, place, post_date, content, photo,
+	 * と assistの中の寄付金合計と Postsテーブルの初期投資金額を合計した値 (posts.post_money + assists.add_money) as money
 	 * の行を取得するクラス
-	 * 
+	 *
 	 * @param no
 	 * @param flagNum
 	 * @return
@@ -152,8 +157,8 @@ public class DataAccess extends Dao {
 		//取得した値の格納先
 		AchievementListScreenInfo list = new AchievementListScreenInfo();
 		//SQL文の作成
-		String sql = "select posts.no, posts.title, posts.place, posts.post_date, posts.content, posts.photo, (posts.post_money + assists.add_money) as money, target_money from posts "
-				+ "inner join (SELECT post_no, sum(assist_money) as add_money from assists GROUP by post_no) as assists "
+		String sql = "select posts.no, posts.title, posts.place, posts.post_date, posts.content, posts.photo, (posts.post_money + COALESCE(assists.add_money,0)) as money, target_money from posts "
+				+ "left join (SELECT post_no, sum(assist_money) as add_money from assists GROUP by post_no) as assists "
 				+ "on assists.post_no = posts.no "
 				+ "where cleaning_flag = " + flagNum + " and posts.no =" + no +" order by post_date ASC" ;
 		System.out.println(sql);
@@ -178,23 +183,23 @@ public class DataAccess extends Dao {
 		}
 		return  list;
 	}
-	
-	
+
+
 	/**
 	 * Postsテーブルの no に適応する行 のカラム（ cleaning_flag） を  flagNum へ更新するクラス
-	 * 
+	 *
 	 * @param no
 	 * @param flagNum
 	 */
-	
+
 	public void UpdateCleuningFlag(String no, String flagNum) {
 		//SQL文の作成
-		String sql = "update posts set cleaning_flag = " + flagNum + " where no = " + no; 
+		String sql = "update posts set cleaning_flag = " + flagNum + " where no = " + no;
 		System.out.println(sql);
 		//SQLの発行
 		try {
 			st.executeUpdate(sql);
-			
+
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -202,28 +207,28 @@ public class DataAccess extends Dao {
 
 	/**
 	 * Postsテーブルの no に適応する行 のcleaning_flag  を  flagNum, target_money を money へ更新するクラス
-	 * 
+	 *
 	 * @param no
 	 * @param flagNum
 	 * @param money
 	 */
-	
+
 	public void UpdateCleuningFlag(String no, String flagNum, String money) {
 		//SQL文の作成
-		String sql = "update posts set cleaning_flag = " + flagNum + ", target_money = " + money + " where no = " + no; 
+		String sql = "update posts set cleaning_flag = " + flagNum + ", target_money = " + money + " where no = " + no;
 		System.out.println(sql);
 		//SQLの発行
 		try {
 			st.executeUpdate(sql);
-			
+
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
-	
+
 	/**
 	 * 管理者ID、パスワードを使いログインできるかを確認する。
-	 * 
+	 *
 	 * @param id
 	 * @param pass
 	 * @return
@@ -237,19 +242,19 @@ public class DataAccess extends Dao {
 			rs.last();
 			int count = rs.getRow();
 			rs.beforeFirst();
-			
+
 			if(count == 0) {
 				return false;
 			}
-			
+
 		}catch (Exception e) {
 			// TODO: handle exception
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	public String GetAdminName(String id, String pass) {
 		//SQL文作成
 		String sql = "Select name from administrators where id = '" + id + "' and password = '" + pass + "'";
@@ -262,7 +267,7 @@ public class DataAccess extends Dao {
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
-		}		
+		}
 		return name;
 	}
 
@@ -271,7 +276,7 @@ public class DataAccess extends Dao {
 		try {
 			String sql = "SELECT COUNT(*) FROM posts where cleaning_flag = " + flagNum + "";
 			rs = st.executeQuery(sql);
-			int max = 0; 
+			int max = 0;
 			if(rs.next()) {
 				max = rs.getInt("COUNT(*)");
 			}
@@ -280,6 +285,76 @@ public class DataAccess extends Dao {
 			throw e;
 		}
 	}
+
+
+//---------------- 問い合わせ -----------------------
+
+
+
+	//データベースのレコード数を抽出
+	public int Max() throws SQLException{
+		try {
+			String sql = "SELECT COUNT(*) FROM contact";
+			rs = st.executeQuery(sql);
+			int max = 0;
+			if(rs.next()) {
+				max = rs.getInt("COUNT(*)");
+			}
+			return max;
+		}catch(SQLException e) {
+			throw e;
+		}
+	}
+
+	public ArrayList<AdminstratorInquiryInfo> getInquiryAllTable(int num){
+		//取得した値の格納先
+		ArrayList<AdminstratorInquiryInfo> table = new ArrayList<AdminstratorInquiryInfo>();
+		//SQL文の作成
+		String sql = "select sequence,members.no,members.name,members.mail_address,content,send_date from contact \n" +
+				"INNER JOIN members ON contact.member_no = members.no order by send_date desc LIMIT "+num+" , 10;" ;
+		System.out.println(sql);
+		//SQLの発行
+		try {
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				AdminstratorInquiryInfo list = new AdminstratorInquiryInfo();
+				list.setSequence(rs.getString("sequence"));
+				list.setMemberNo(rs.getString("no"));
+				list.setMemberName(rs.getString("name"));
+				list.setMailAddress(rs.getString("mail_address"));
+				list.setContent(rs.getString("content"));
+				list.setSendData(rs.getString("send_date"));
+				table.add(list);
+			}
+		}catch (Exception e) {
+		}
+		return  table;
+	}
+
+	public AdminstratorInquiryInfo getInquiryTable(String no){
+		//取得した値の格納先
+		AdminstratorInquiryInfo list = new AdminstratorInquiryInfo();
+		//SQL文の作成
+		String sql = "select sequence,members.no,members.name,members.mail_address,content,send_date from contact \n" +
+					 "INNER JOIN members ON contact.member_no = members.no where sequence = "+ no +";";
+		System.out.println(sql);
+		//SQLの発行
+		try {
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				list.setSequence(rs.getString("sequence"));
+				list.setMemberNo(rs.getString("no"));
+				list.setMemberName(rs.getString("name"));
+				list.setMailAddress(rs.getString("mail_address"));
+				list.setContent(rs.getString("content"));
+				list.setSendData(rs.getString("send_date"));
+			}
+		}catch (Exception e) {
+		}
+		return  list;
+	}
+
+
 
 
 }

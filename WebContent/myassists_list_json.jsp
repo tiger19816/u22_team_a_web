@@ -5,7 +5,7 @@
 ArrayList<Posts> postsList = (ArrayList<Posts>)request.getAttribute("LIST");
 %>
 {
-	"postsList":[
+	"assistsList":[
 		<% for(int i=0; i<postsList.size(); i++){ %>
 		{
 			"postNo":"<%= postsList.get(i).getNo() %>",

@@ -45,6 +45,8 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
         //文字化け対策
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+        //変数宣言
+        int money = 3000;			//目標金額の指定
         //クラス宣言
         NewProjectPostsConfirmationScreenActivityInfo info = new NewProjectPostsConfirmationScreenActivityInfo();
         //クラスにAndroidの値を格納1
@@ -86,7 +88,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
         //データベースへの登録
         try {
             da = new DataAccess();
-            da.InsertPosts(info);
+            da.InsertPosts(info, money);
             da.close();
         } catch (Exception e) {
             // TODO: handle exception

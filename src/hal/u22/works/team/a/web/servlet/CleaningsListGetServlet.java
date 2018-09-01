@@ -1,7 +1,5 @@
 package hal.u22.works.team.a.web.servlet;
 
-import hal.u22.works.team.a.web.tools.CleanImageUploadDao;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hal.u22.works.team.a.web.tools.ProjectInfoDao;
 /**
  * Servlet implementation class CleaningsListGetServlet
  */
@@ -41,7 +40,7 @@ public class CleaningsListGetServlet extends HttpServlet {
 		List<String[]> projectsList;
 
 		try {
-			CleanImageUploadDao dao = new CleanImageUploadDao();
+			ProjectInfoDao dao = new ProjectInfoDao();
 
 			supplierList = dao.getSupplierList();
 			projectsList = dao.getProjectsList();

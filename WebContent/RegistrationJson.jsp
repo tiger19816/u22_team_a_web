@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	String str = (String)request.getAttribute("result");
-	String userId = (String)request.getAttribute("userId");
+	Boolean str = (Boolean)request.getAttribute("result");
+	int userId = (Integer)request.getAttribute("userId");
 %>
 {
 	"result":<%= str %>,

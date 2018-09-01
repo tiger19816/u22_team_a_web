@@ -1,8 +1,5 @@
 package hal.u22.works.team.a.web.servlet;
 
-import hal.u22.works.team.a.web.newProject.ImageSave;
-import hal.u22.works.team.a.web.tools.CleanImageUploadDao;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import hal.u22.works.team.a.web.newProject.ImageSave;
+import hal.u22.works.team.a.web.tools.ProjectInfoDao;
 /**
  * Servlet implementation class CleanImageUploadServlet
  */
@@ -55,16 +54,12 @@ public class CleanImageUploadServlet extends HttpServlet {
 			Files.createDirectory(smallPath);
 		}
 
-		System.out.println(request.getParameter("supplierNo")+":"+request.getParameter("projectNo"));
-
 		//画像を保存する
 		try {
+			System.out.println(request.getPart("fileName"));
 			ImageSave is = new ImageSave();
-			CleanImageUploadDao dao = new CleanImageUploadDao();
-
+			ProjectInfoDao dao = new ProjectInfoDao();
 			is.imageTempSave(request.getPart("fileName"), tempPath);
-
-			System.out.println(request.getParameter("supplierNo")+":"+request.getParameter("projectNo")+":"+is.getFileName());
 			dao.updateData(request.getParameter("supplierNo"), request.getParameter("projectNo"), is.getFileName());
 			request.setAttribute("imgPath", "./temp/" + is.getFileName());
 		} catch (ClassNotFoundException | SQLException e) {

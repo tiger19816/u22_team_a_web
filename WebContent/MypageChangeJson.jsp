@@ -8,9 +8,9 @@
 
 %>
 {
-	"name":<%= name %>,
-	"birthdate":<%= birthdate %>,
-	"address":<%= address %>,
-	"mail_address":<%= mail_address %>,
-	"phone":<%= phone %>
+	"name":"<%= name %>",
+	"birthdate":"<%= birthdate %>",
+	"address":"<%= address %>",
+	"mail_address":"<%= mail_address %>",
+	"phone":"<%= phone %>"
 }
