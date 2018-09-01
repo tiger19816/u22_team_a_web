@@ -54,7 +54,7 @@ public class CertainAmountAchievementDetailScreenInsertServlet extends HttpServl
 				String allMone = request.getParameter("allMoney");
 				if(Integer.parseInt(money) <= Integer.parseInt(allMone) ) {
 					flagNum = "4";
-					da.UpdateCleuningFlag(no, flagNum);
+					da.UpdateCleuningFlag(no, flagNum, money);
 				}else {
 					da.UpdateCleuningFlag(no ,flagNum, money);
 				}
