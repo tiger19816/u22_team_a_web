@@ -19,7 +19,7 @@ import hal.u22.works.team.a.web.distance.Distance;
  */
 @WebServlet("/DistanceServlet")
 public class DistanceServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,45 +29,51 @@ public class DistanceServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//文字化け対策
-		request.setCharacterEncoding("utf-8");
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        //文字化け対策
+        request.setCharacterEncoding("utf-8");
 
-		//現在地の緯度・経度
-		double lat = Double.parseDouble(request.getParameter("lat"));
-		double lng = Double.parseDouble(request.getParameter("lng"));
-//		double lat = (double) 121;
-//		double lng = (double) 33;
+        //現在地の緯度・経度
+        double lat = Double.parseDouble(request.getParameter("lat"));
+        double lng = Double.parseDouble(request.getParameter("lng"));
 
-		response.setContentType("application/json; charset=UTF-8");
+        int flag = Integer.valueOf(request.getParameter("flag"));
 
-		try {
-			ArrayList<Map<String, String>> point = new ArrayList<Map<String, String>>();
-			Distance d = new Distance();
-			point = d.getPoint(lat, lng);
-			request.setAttribute("result", point);
-			RequestDispatcher rd = request.getRequestDispatcher("DistanceJson.jsp");
-			rd.forward(request, response);
-		} catch (ClassNotFoundException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+        response.setContentType("application/json; charset=UTF-8");
 
-	}
+        try {
+            ArrayList<Map<String, String>> point = new ArrayList<Map<String, String>>();
+            Distance d = new Distance();
+            if(flag == -1) {
+                point = d.getPoint(lat, lng);
+            } else {
+                point = d.getPoint(lat, lng, flag);
+            }
+            request.setAttribute("result", point);
+            RequestDispatcher rd = request.getRequestDispatcher("DistanceJson.jsp");
+            rd.forward(request, response);
+        } catch (ClassNotFoundException e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace();
+        }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
