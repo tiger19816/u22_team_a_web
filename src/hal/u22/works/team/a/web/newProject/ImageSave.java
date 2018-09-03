@@ -63,7 +63,7 @@ public class ImageSave {
             fileType = filename.substring(point + 1);
         }
 
-//		boolean isJpegFile = false;
+        //		boolean isJpegFile = false;
         // JPEG形式のチェック
         if ((contentType.equals("image/jpeg")) || (contentType.equals("image/pjpeg"))
                 || (contentType.equals("image/png"))) {
@@ -87,7 +87,7 @@ public class ImageSave {
 
     private void createThumbnail(String originFile, String thumbFile, String fileType, int width) {
         try {
-        	// 元画像の読み込み
+            // 元画像の読み込み
             BufferedImage image = ImageIO.read(new File(originFile));
 
             // 元画像の情報を取得

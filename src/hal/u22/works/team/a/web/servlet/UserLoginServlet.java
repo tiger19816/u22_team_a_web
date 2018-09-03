@@ -49,7 +49,8 @@ public class UserLoginServlet extends HttpServlet {
         System.out.println(sql);
 
         //ログインユーザーの名前を取得
-        String user_name_sql = "select name from members where mail_address = '"+ userMail +"' AND password = '"+ userPassword +"';";
+        String user_name_sql = "select name from members where mail_address = '" + userMail + "' AND password = '"
+                + userPassword + "';";
 
         //DBに接続
         Dao dao = null;
@@ -64,8 +65,8 @@ public class UserLoginServlet extends HttpServlet {
             }
             System.out.println(count);
             rs = dao.execute(user_name_sql);
-            while(rs.next()){
-            	userName = rs.getString("name");
+            while (rs.next()) {
+                userName = rs.getString("name");
             }
             if (count != 0) {
                 request.setAttribute("result", "true");

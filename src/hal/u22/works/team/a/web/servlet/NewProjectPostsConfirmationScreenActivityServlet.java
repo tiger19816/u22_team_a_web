@@ -46,7 +46,7 @@ public class NewProjectPostsConfirmationScreenActivityServlet extends HttpServle
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         //変数宣言
-        int money = 3000;			//目標金額の指定
+        int money = 3000; //目標金額の指定
         //クラス宣言
         NewProjectPostsConfirmationScreenActivityInfo info = new NewProjectPostsConfirmationScreenActivityInfo();
         //クラスにAndroidの値を格納1

@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import hal.u22.works.team.a.web.entities.Page;
 import hal.u22.works.team.a.web.tools.DataAccess;
+
 /**
  * Servlet implementation class CertainAmountAchievementListScreenServlet
  */
 @WebServlet("/CertainAmountAchievementListScreenServlet")
 public class CertainAmountAchievementListScreenServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,63 +28,65 @@ public class CertainAmountAchievementListScreenServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//--------------文字化け対策-----------------------
-    	request.setCharacterEncoding("UTF-8");
-    	response.setCharacterEncoding("UTF-8");
-    	
-    	//--------------変数宣言------------------
-		String flagNum ="";
-		if(null !=  request.getParameter("flagNum")) {
-			flagNum = request.getParameter("flagNum");
-		}else {
-			flagNum = (String)request.getAttribute("flagNum");
-		}
-    	ArrayList<AchievementListScreenInfo> arrayAchive=	new ArrayList<AchievementListScreenInfo>(); 
-		String strJspName = "TargetAmountAchievementListScreen.jsp"; 
-		int max = 0;
-		Page p = new Page();
-    			
-		//--------------処理--------------------------
-		try {
-			
-			//DAOのコンストラクト呼び出し
-			DataAccess da = new DataAccess();
-			//ページング
-			max = da.Max(flagNum);
-			p.setPageNum(max);
-			String page = (String)request.getParameter("id");
-			if(page == null) {
-				page = "1";
-			}
-			p.setNowPage(page);
-			//array＊クラスの値を格納
-			arrayAchive = da.getPostsAllTable(flagNum,p.getFirstRecode());
-			
-			if("1".equals(flagNum)) {
-				strJspName ="certainAmountAchievementScreen.jsp" ;
-			}
-			
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        //--------------文字化け対策-----------------------
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-		request.setAttribute("PAGE", p);
-		request.setAttribute("arrayAchive", arrayAchive);
+        //--------------変数宣言------------------
+        String flagNum = "";
+        if (null != request.getParameter("flagNum")) {
+            flagNum = request.getParameter("flagNum");
+        } else {
+            flagNum = (String) request.getAttribute("flagNum");
+        }
+        ArrayList<AchievementListScreenInfo> arrayAchive = new ArrayList<AchievementListScreenInfo>();
+        String strJspName = "TargetAmountAchievementListScreen.jsp";
+        int max = 0;
+        Page p = new Page();
+
+        //--------------処理--------------------------
+        try {
+
+            //DAOのコンストラクト呼び出し
+            DataAccess da = new DataAccess();
+            //ページング
+            max = da.Max(flagNum);
+            p.setPageNum(max);
+            String page = (String) request.getParameter("id");
+            if (page == null) {
+                page = "1";
+            }
+            p.setNowPage(page);
+            //array＊クラスの値を格納
+            arrayAchive = da.getPostsAllTable(flagNum, p.getFirstRecode());
+
+            if ("1".equals(flagNum)) {
+                strJspName = "certainAmountAchievementScreen.jsp";
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        request.setAttribute("PAGE", p);
+        request.setAttribute("arrayAchive", arrayAchive);
         RequestDispatcher rd = request.getRequestDispatcher(strJspName);
-        rd.forward(request,response);
-	}
+        rd.forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }

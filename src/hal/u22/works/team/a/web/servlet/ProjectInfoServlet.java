@@ -1,7 +1,5 @@
 package hal.u22.works.team.a.web.servlet;
 
-import hal.u22.works.team.a.web.tools.ProjectInfoDao;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -19,7 +17,7 @@ import hal.u22.works.team.a.web.tools.ProjectInfoDao;
  */
 @WebServlet("/ProjectInfoServlet")
 public class ProjectInfoServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,40 +27,42 @@ public class ProjectInfoServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//文字化け対策
-		request.setCharacterEncoding("utf-8");
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        //文字化け対策
+        request.setCharacterEncoding("utf-8");
 
-		String no = request.getParameter("no");
-		String result = "";
+        String no = request.getParameter("no");
+        String result = "";
 
-		ProjectInfoDao dao = null;
+        ProjectInfoDao dao = null;
 
-		try {
-			dao = new ProjectInfoDao();
-			result = dao.getProjectInfo(no);
-			result = dao.getCleaningImage(result, no);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+        try {
+            dao = new ProjectInfoDao();
+            result = dao.getProjectInfo(no);
+            result = dao.getCleaningImage(result, no);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-		request.setAttribute("result", result);
-		RequestDispatcher rd = request.getRequestDispatcher("ResultJSON.jsp");
-		rd.forward(request, response);
-	}
+        request.setAttribute("result", result);
+        RequestDispatcher rd = request.getRequestDispatcher("ResultJSON.jsp");
+        rd.forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }

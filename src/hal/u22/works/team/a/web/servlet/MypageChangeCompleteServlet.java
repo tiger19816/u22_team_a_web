@@ -16,7 +16,7 @@ import hal.u22.works.team.a.web.tools.Dao;
  */
 @WebServlet("/MypageChangeCompleteServlet")
 public class MypageChangeCompleteServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,52 +26,54 @@ public class MypageChangeCompleteServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//文字化け対策
-		request.setCharacterEncoding("utf-8");
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        //文字化け対策
+        request.setCharacterEncoding("utf-8");
 
-		//Androidから値を取得
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		String sex = request.getParameter("sex");
-		String mail = request.getParameter("mail");
-		String phone = request.getParameter("phone");
-		String no = request.getParameter("no");
+        //Androidから値を取得
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String sex = request.getParameter("sex");
+        String mail = request.getParameter("mail");
+        String phone = request.getParameter("phone");
+        String no = request.getParameter("no");
 
- 		String sql = "UPDATE members SET ";
-		sql += "name = '" + name + "', ";
-		sql += "address = '" + address + "', ";
-		sql += "sex = '" + sex + "', ";
-		sql += "mail_address = '" + mail + "', ";
-		sql += "phone = '" + phone + "'";
-		sql += " WHERE no = " + Integer.parseInt(no) +";";
+        String sql = "UPDATE members SET ";
+        sql += "name = '" + name + "', ";
+        sql += "address = '" + address + "', ";
+        sql += "sex = '" + sex + "', ";
+        sql += "mail_address = '" + mail + "', ";
+        sql += "phone = '" + phone + "'";
+        sql += " WHERE no = " + Integer.parseInt(no) + ";";
 
-		Dao dao = null;
-		try {
-			dao = new Dao();
-			dao.executeUpdate(sql);
-			request.setAttribute("result", "true");
-		} catch (Exception e) {
-		} finally {
-			try {
-				dao.close();
-			} catch (Exception e) {
-			}
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("Test.jsp");
-		rd.forward(request, response);
-	}
+        Dao dao = null;
+        try {
+            dao = new Dao();
+            dao.executeUpdate(sql);
+            request.setAttribute("result", "true");
+        } catch (Exception e) {
+        } finally {
+            try {
+                dao.close();
+            } catch (Exception e) {
+            }
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("Test.jsp");
+        rd.forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }

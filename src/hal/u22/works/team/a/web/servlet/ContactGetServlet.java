@@ -17,88 +17,87 @@ import hal.u22.works.team.a.web.tools.Sql;;
  */
 @WebServlet("/ContactGetServlet")
 public class ContactGetServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ContactGetServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ContactGetServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-		//お問い合わせの内容と名前を受け取る
+        //お問い合わせの内容と名前を受け取る
 
-		String noStr = request.getParameter("no");
-		String contentStr = request.getParameter("content");
+        String noStr = request.getParameter("no");
+        String contentStr = request.getParameter("content");
 
-		//今日の日付の取得
-		Calendar cal = Calendar.getInstance();
-		int yearInt = cal.get(Calendar.YEAR);
-		int monthInt = cal.get(Calendar.MONTH);
-		int dateInt = cal.get(Calendar.DATE);
+        //今日の日付の取得
+        Calendar cal = Calendar.getInstance();
+        int yearInt = cal.get(Calendar.YEAR);
+        int monthInt = cal.get(Calendar.MONTH);
+        int dateInt = cal.get(Calendar.DATE);
 
-		String yearStr = String.valueOf(yearInt);
-		String monthStr = String.valueOf(monthInt);
-		String dateStr = String.valueOf(dateInt);
+        String yearStr = String.valueOf(yearInt);
+        String monthStr = String.valueOf(monthInt);
+        String dateStr = String.valueOf(dateInt);
 
-		String date = yearStr + "-" + monthStr + "-" + dateStr;
-		System.out.println(date);
+        String date = yearStr + "-" + monthStr + "-" + dateStr;
+        System.out.println(date);
 
-		//値をContactクラスに入れる
-		Contact c = new Contact();
-		int member_no = Integer.parseInt(noStr);
+        //値をContactクラスに入れる
+        Contact c = new Contact();
+        int member_no = Integer.parseInt(noStr);
 
-		c.setMember_no(member_no);
-		c.setContent(contentStr);
-		c.setDate(date);
+        c.setMember_no(member_no);
+        c.setContent(contentStr);
+        c.setDate(date);
 
-		//true,falseの格納用
-		Boolean dbSuccess = false;
+        //true,falseの格納用
+        Boolean dbSuccess = false;
 
-		//DBに入力
-		Sql s = null;
+        //DBに入力
+        Sql s = null;
 
-		try {
-			s = new Sql();
-			s.insertContentNew(c);
-			dbSuccess = true;
-		} catch (Exception e) {
+        try {
+            s = new Sql();
+            s.insertContentNew(c);
+            dbSuccess = true;
+        } catch (Exception e) {
 
-			System.out.println("Exception e");
+            System.out.println("Exception e");
 
-		} finally {
-			try {
-				s.close();
-			} catch (Exception e) {
-				System.out.println("Exception e  2");
-			}
+        } finally {
+            try {
+                s.close();
+            } catch (Exception e) {
+                System.out.println("Exception e  2");
+            }
 
-		}
+        }
 
-		//アンドロイド側に実行結果を返す
-		//********************************************
+        //アンドロイド側に実行結果を返す
+        //********************************************
 
+        //*******************************************
+    }
 
-		//*******************************************
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }

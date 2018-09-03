@@ -1,7 +1,6 @@
 package hal.u22.works.team.a.achievement.list.screen;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +16,8 @@ import hal.u22.works.team.a.web.tools.DataAccess;
  */
 @WebServlet("/CertainAmountAchievementDetailScreenServlet")
 public class CertainAmountAchievementDetailScreenServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,47 +26,49 @@ public class CertainAmountAchievementDetailScreenServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//--------------文字化け対策-----------------------
-    	request.setCharacterEncoding("UTF-8");
-    	response.setCharacterEncoding("UTF-8");
-    	
-    	//--------------変数宣言------------------
-    	String no = request.getParameter("no");
-		String flagNum = request.getParameter("flagNum");
-    	AchievementListScreenInfo achive=	new AchievementListScreenInfo(); 
-		String strJspName = "TargetAmountAchievementDetailScreen.jsp"; 
-    			
-		//--------------処理--------------------------
-		try {
-			
-			//DAOのコンストラクト呼び出し
-			DataAccess da = new DataAccess();
-			//ラスの値を格納
-			achive = da.getPostsTable(no ,flagNum);
-			
-			if("1".equals(flagNum)){
-				strJspName = "certainAmountAchievementDetailScreen.jsp";
-			}
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		request.setAttribute("achive", achive);
-        RequestDispatcher rd = request.getRequestDispatcher(strJspName);
-        rd.forward(request,response);
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        //--------------文字化け対策-----------------------
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        //--------------変数宣言------------------
+        String no = request.getParameter("no");
+        String flagNum = request.getParameter("flagNum");
+        AchievementListScreenInfo achive = new AchievementListScreenInfo();
+        String strJspName = "TargetAmountAchievementDetailScreen.jsp";
+
+        //--------------処理--------------------------
+        try {
+
+            //DAOのコンストラクト呼び出し
+            DataAccess da = new DataAccess();
+            //ラスの値を格納
+            achive = da.getPostsTable(no, flagNum);
+
+            if ("1".equals(flagNum)) {
+                strJspName = "certainAmountAchievementDetailScreen.jsp";
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        request.setAttribute("achive", achive);
+        RequestDispatcher rd = request.getRequestDispatcher(strJspName);
+        rd.forward(request, response);
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }

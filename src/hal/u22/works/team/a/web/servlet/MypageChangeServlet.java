@@ -38,26 +38,26 @@ public class MypageChangeServlet extends HttpServlet {
         //文字化け対策
         request.setCharacterEncoding("utf-8");
 
-       	String userId = request.getParameter("userId");
-       	System.out.println(userId);
-       	//値を格納するための変数
-       	String no = "";//会員番号
-       	String name = "";//氏名
-       	String birthdate = "";//生年月日
-       	String address = "";//住所
-       	String sex = "";//性別
-       	String mail_address = "";//メールアドレス
-       	String phone = "";//電話番号
+        String userId = request.getParameter("userId");
+        System.out.println(userId);
+        //値を格納するための変数
+        String no = "";//会員番号
+        String name = "";//氏名
+        String birthdate = "";//生年月日
+        String address = "";//住所
+        String sex = "";//性別
+        String mail_address = "";//メールアドレス
+        String phone = "";//電話番号
 
         String sql = "SELECT no,name,birthdate,address,sex,mail_address,phone FROM members WHERE no = "
-                + userId +";";
+                + userId + ";";
         Dao dao = null;
         ResultSet rs = null;
         try {
             dao = new Dao();
             rs = dao.execute(sql);
             if (rs.next()) {
-            	no = rs.getString("no");
+                no = rs.getString("no");
                 name = rs.getString("name");
                 birthdate = rs.getString("birthdate");
                 address = rs.getString("address");
@@ -69,11 +69,11 @@ public class MypageChangeServlet extends HttpServlet {
             System.out.println(address);
             System.out.println(mail_address);
             System.out.println(phone);
-//            request.setAttribute("no", no);
+            //            request.setAttribute("no", no);
             request.setAttribute("name", name);
             request.setAttribute("birthdate", birthdate);
             request.setAttribute("address", address);
-//            request.setAttribute("sex", sex);
+            //            request.setAttribute("sex", sex);
             request.setAttribute("mail_address", mail_address);
             request.setAttribute("phone", phone);
 
