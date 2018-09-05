@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>お問い合わせリスト画面</title>
 <style>
 .row-eq-height {
 	display: -webkit-flex; /* Safari */

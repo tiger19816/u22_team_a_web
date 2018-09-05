@@ -9,7 +9,7 @@
 %>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>管理者TOP画面</title>
 <style>
 .row-eq-height {
 	display: -webkit-flex; /* Safari */
