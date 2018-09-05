@@ -5,12 +5,12 @@
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-	AchievementListScreenInfo achivement =(AchievementListScreenInfo)request.getAttribute("achive");	
-%>	
+	AchievementListScreenInfo achivement =(AchievementListScreenInfo)request.getAttribute("achive");
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>お問い合わせ詳細画面</title>
+<title>一定額達成詳細画面</title>
 <style>
 .row-eq-height {
 	display: -webkit-flex; /* Safari */
@@ -53,7 +53,7 @@
 		<a href="javascript:history.back()" style ="margign:100px">戻る</a>
 	</div>
 	<br><input type="submit" class="btn btn-primary" value="目標金額の登録">
-	
+
 </form>
 
 </div>

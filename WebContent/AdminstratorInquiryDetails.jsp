@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>一定額達成詳細画面</title>
+<title>お問い合わせ詳細画面</title>
 <style>
 .row-eq-height {
 	display: -webkit-flex; /* Safari */

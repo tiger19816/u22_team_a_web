@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>お問い合わせリスト画面</title>
+<title>一定額達成リスト画面</title>
 <style>
 .row-eq-height {
 	display: -webkit-flex; /* Safari */
@@ -38,7 +38,7 @@
 <body>
 
 <div class="container">
-	<table class="table table-striped" <%if(p.getMarginFlg()){ %>style="margin-bottom : <%=p.getMargin() %>px"<%} %>>	
+	<table class="table table-striped" <%if(p.getMarginFlg()){ %>style="margin-bottom : <%=p.getMargin() %>px"<%} %>>
 			<thead>
 				<tr>
 					<th>タイトル</th>
@@ -54,7 +54,7 @@
 					<td><%=achive.getPlace() %></td>
 					<td><%=achive.getPostDate() %></td>
 					<td><a href="./CertainAmountAchievementDetailScreenServlet?flagNum=1&no=<%=achive.getNo() %>">目標金額設定</a></td>
-				</tr>	
+				</tr>
 			<%}%>
 			</tbody>
 		</table>
@@ -65,7 +65,7 @@
 				<a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=<%=p.getNextPage()-1 %>&flagNum=1" aria-label="前">
 		       		<span aria-hidden="true">&laquo;</span>
 		       		<span class="sr-only">前</span>
-		    		</a> 
+		    		</a>
 		    </li>
 		<%} %>
 			<%if(p.getMinF()){%><li class="page-item"><a class="page-link" href="./CertainAmountAchievementListScreenServlet?id=1&flagNum=1">1..</a></li><%} %>

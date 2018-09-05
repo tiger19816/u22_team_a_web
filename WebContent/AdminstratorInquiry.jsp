@@ -13,7 +13,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>一定額達成リスト画面</title>
+<title>お問い合わせリスト画面</title>
 <style>
 .row-eq-height {
 	display: -webkit-flex; /* Safari */
