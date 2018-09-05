@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import = "hal.u22.works.team.a.achievement.list.screen.AchievementListScreenInfo"
+    import ="hal.u22.works.team.a.web.tools.Tools"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
@@ -42,7 +43,7 @@
 		<tr><th>投稿日</th><td><%=achivement.getPostDate() %></td></tr>
 		<tr><th>内容</th><td><%=achivement.getContent() %></td></tr>
 		<tr><th>写真</th><td><%=achivement.getPhoto() %></td></tr>
-		<tr><th>集計金額</th><td><%=achivement.getPostMoney() %></td></tr>
+		<tr><th>集計金額</th><td align="right"><%= Tools.StrNumToStringCom(achivement.getPostMoney()) + " 円"%></td></tr>
 		<tr><th>目標金額の設定</th><td><input type="text" class="form-control" name="money"></td></tr>
 	</table>
 	<input type="hidden" name="allMoney" value="<%= achivement.getPostMoney() %>">
