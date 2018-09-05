@@ -41,9 +41,11 @@
 	<div id="logout">
 		<a href ="./AdministratorLogOutServlet">ログアウト</a>
 	</div>
-	<a href="./CertainAmountAchievementListScreenServlet?flagNum=1">一定額達成リスト</a>
-	<a href="./CertainAmountAchievementListScreenServlet?flagNum=3">目標額達成リスト</a>
-	<a href="./AdminstratorInquiryServlet?flagNum=1">お問い合わせ</a>
+	<ul>
+	<li><a href="./CertainAmountAchievementListScreenServlet?flagNum=1">一定額達成リスト</a></li>
+	<li><a href="./CertainAmountAchievementListScreenServlet?flagNum=3">目標額達成リスト</a></li>
+	<li><a href="./AdminstratorInquiryServlet?flagNum=1">お問い合わせ</a></li>
+	</ul>
 </div>
 </body>
 </html>
