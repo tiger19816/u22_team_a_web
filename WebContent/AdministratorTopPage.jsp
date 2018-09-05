@@ -37,15 +37,14 @@
 	<div id ="userName">
 		<p><%=name %></p>
 	</div>
-
-	<div id="logout">
-		<a href ="./AdministratorLogOutServlet">ログアウト</a>
-	</div>
 	<ul>
 	<li><a href="./CertainAmountAchievementListScreenServlet?flagNum=1">一定額達成リスト</a></li>
 	<li><a href="./CertainAmountAchievementListScreenServlet?flagNum=3">目標額達成リスト</a></li>
 	<li><a href="./AdminstratorInquiryServlet?flagNum=1">お問い合わせ</a></li>
 	</ul>
+	<div id="logout">
+		<a href ="./AdministratorLogOutServlet">ログアウト</a>
+	</div>
 </div>
 </body>
 </html>
